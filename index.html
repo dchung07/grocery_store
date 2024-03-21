@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Grocery Store</title>
+    <link rel="stylesheet" href="styles.css" /> 
+    <script src="index.js" defer></script>
+</head>
+<body>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+
+            <div class="modal-content-header">
+                <h3>Your Cart</h3>
+                <span class="close">&times;</span>
+            </div>
+
+            <div class="modal-content-content">
+                <h6>4 item(s)</h6>
+                <div class="modal-content-card-container-container">
+                    <div class="modal-content-card-container">
+
+                        <div class="modal-content-card">
+                            <div class="modal-content-card-top">
+                                <div class="modal-logo-name">
+                                    <img src="images/food-croissant.svg" alt="">
+                                    <h6>Croissant</h6>
+                                </div>
+                                <h6>x</h6>
+                            </div>
+                            <div class="modal-content-card-bot">
+                                <div class="quantity-selector-container">
+                                    <button>-</button>
+                                    <input type="text" value="0">
+                                    <button>+</button>
+                                </div>
+                                <h4>$3.61</h4>
+                            </div>
+                        </div>
+                        <div class="modal-content-card">
+                            <div class="modal-content-card-top">
+                                <div class="modal-logo-name">
+                                    <img src="images/food-croissant.svg" alt="">
+                                    <h6>Croissant</h6>
+                                </div>
+                                <h6>x</h6>
+                            </div>
+                            <div class="modal-content-card-bot">
+                                <div class="quantity-selector-container">
+                                    <button>-</button>
+                                    <input type="text" value="0">
+                                    <button>+</button>
+                                </div>
+                                <h4>$3.61</h4>
+                            </div>
+                        </div>
+                        <div class="modal-content-card">
+                            <div class="modal-content-card-top">
+                                <div class="modal-logo-name">
+                                    <img src="images/food-croissant.svg" alt="">
+                                    <h6>Croissant</h6>
+                                </div>
+                                <h6>x</h6>
+                            </div>
+                            <div class="modal-content-card-bot">
+                                <div class="quantity-selector-container">
+                                    <button>-</button>
+                                    <input type="text" value="0">
+                                    <button>+</button>
+                                </div>
+                                <h4>$3.61</h4>
+                            </div>
+                        </div>
+                        <div class="modal-content-card">
+                            <div class="modal-content-card-top">
+                                <div class="modal-logo-name">
+                                    <img src="images/food-croissant.svg" alt="">
+                                    <h6>Croissant</h6>
+                                </div>
+                                <h6>x</h6>
+                            </div>
+                            <div class="modal-content-card-bot">
+                                <div class="quantity-selector-container">
+                                    <button>-</button>
+                                    <input type="text" value="0">
+                                    <button>+</button>
+                                </div>
+                                <h4>$3.61</h4>
+                            </div>
+                        </div>
+                        <div class="modal-content-card">
+                            <div class="modal-content-card-top">
+                                <div class="modal-logo-name">
+                                    <img src="images/food-croissant.svg" alt="">
+                                    <h6>Croissant</h6>
+                                </div>
+                                <h6>x</h6>
+                            </div>
+                            <div class="modal-content-card-bot">
+                                <div class="quantity-selector-container">
+                                    <button>-</button>
+                                    <input type="text" value="0">
+                                    <button>+</button>
+                                </div>
+                                <h4>$3.61</h4>
+                            </div>
+                        </div>
+                        <div class="modal-content-card">
+                            <div class="modal-content-card-top">
+                                <div class="modal-logo-name">
+                                    <img src="images/food-croissant.svg" alt="">
+                                    <h6>Croissant</h6>
+                                </div>
+                                <h6>x</h6>
+                            </div>
+                            <div class="modal-content-card-bot">
+                                <div class="quantity-selector-container">
+                                    <button>-</button>
+                                    <input type="text" value="0">
+                                    <button>+</button>
+                                </div>
+                                <h4>$3.61</h4>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="remove-all-container">
+                        <h4>Remove All</h4>
+                        <img src="images/delete_black_24dp.svg" alt="Delete Icon">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-content-footer">
+                <h5>Order Summary</h5>
+                <div class="checkout-info">
+                    <h5>Price</h5>
+                    <button>Place an order</button>
+                </div>
+            </div>
+            
+        </div>
+      </div>
+
+    <div class="container">
+        <div class="header">
+
+            <div class="logo">
+                <h3>Foodies</h3>
+                <img src="images/food-croissant.svg" alt="logo">
+            </div>
+
+            <div class="header_middle">
+                <form class="categoryForm" action="index.php" method="POST">
+                    <select class="categoryDropdown" name="categoryDropdown" id="category">
+                        <option value="" disabled selected>Category</option>
+                        <option value="Fruits">Fresh</option>
+                        <option value="western">Western</option>
+                        <option value="asian">Asian</option>
+                    </select>
+                </form>
+    
+                <form class="searchbar" action="handle_search.php" method="POST">
+                    <input type="search" placeholder = "Search Products..." name="search">
+                    <input type="image" src="images/search_black_24dp.svg" alt="submit">
+                    </input>
+                </form>
+            </div>
+
+            <form class="shopping" action="index.php" method="POST">
+                <img class="shoppingCartIcon" src="images/cart.svg" alt="shopping cart">
+            </form>
+
+        </div>
+
+        <div class="content">
+            <div class="card-container">
+                <!-- <div class="card">
+                    <img src="images/food-croissant.svg" alt="">
+                    <h4>$3.61/1kg</h4>
+                    <h5>Croissant</h5>
+                    <button>Add to Cart</button>
+                </div> -->
+
+                <div class="card-container">
+                    <?php
+
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $dbname = "grocery";
+        
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+    
+        
+                    // Fetch data from your table
+                    $sql = "SELECT * FROM your_table";
+                    $result = $conn->query($sql);
+        
+                    // Display data in cards
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            echo '<div class="card">';
+                            echo '<img src="' . $row['image_url'] . '" alt="' . $row['name'] . '">';
+                            echo '<h4>' . $row['price'] . '</h4>';
+                            echo '<h5>' . $row['name'] . '</h5>';
+                            echo '<button>Add to Cart</button>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo "0 results";
+                    }
+                    $conn->close();
+                    
+                    ?>  
+
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
