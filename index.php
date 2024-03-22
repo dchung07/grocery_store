@@ -101,6 +101,8 @@
 
                 <div class="card-container">
                     <?php
+
+                        session_start();
                         $servername = "localhost";
                         $username = "root";
                         $password = "";
@@ -110,17 +112,38 @@
 
                         $sql = "SELECT * FROM products";
 
-
+                        //If select category option
                         if (isset($_POST['categoryDropdown']) && !empty($_POST['categoryDropdown'])) {
                             $category = $_POST['categoryDropdown'];
+                            //Set variable to the option value
+                            $_SESSION['category'] = $category; 
+                            //Set session variable (category) to option value
                             $sql = "SELECT * FROM products WHERE category ='$category'";
                         } elseif(isset($_POST['searchSubmit']) && !empty($_POST['search'])) {
+                            //If click on search, set variable to search value
+                            //Set session variable (search) to search value
                             $search = $_POST['search'];
+                            $_SESSION['search'] = $search; 
+                            //Had to unset the session for category since it was messing with the
+                            //Search session results as it had lower precedence in the conditional chain
+                            unset($_SESSION['category']);
+                            $sql = "SELECT * FROM products WHERE product_name LIKE '%$search%'";
+                        } elseif(isset($_SESSION['category'])) {
+                            //In the case of a form reset, the category previous selection will be
+                            //Higher on prevalence.
+                            $category = $_SESSION['category'];
+                            $sql = "SELECT * FROM products WHERE category ='$category'";
+                        } elseif(isset($_SESSION['search'])) {
+                            $search = $_SESSION['search'];
+
                             $sql = "SELECT * FROM products WHERE product_name LIKE '%$search%'";
                         }
 
-                        //Make dropdown Work
+                        //Make dropdown Work //Resolved after just restarting xampp, and vscode
                         //Add to Cart > Actually add to cart
+                        //Keep search results even if user adds to cart. Currently, when user adds to cart, the entire page refreshes
+                        //works with category but not with search
+                        //And search filters are reset
                         //If customer tries to add more quantity than exists, send error, or max the quantity field to in_stock
                         
 

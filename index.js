@@ -23,16 +23,19 @@ close.addEventListener('click', function() {
 //Category Selection
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    var categoryDropdown = document.getElementById('category');
+// document.addEventListener('DOMContentLoaded', function() {
+//     var categoryDropdown = document.getElementById('category');
 
-    categoryDropdown.addEventListener('change', function() {
-        var selectedCategory = categoryDropdown.value;
-        window.location.href = 'index.php?categoryDropdown=' + encodeURIComponent(selectedCategory);
-    });
-});
+//     categoryDropdown.addEventListener('change', function() {
+//         var selectedCategory = categoryDropdown.value;
+//         window.location.href = 'index.php?categoryDropdown=' + encodeURIComponent(selectedCategory);
+//     });
+// });
+
+
 
 function submitForm() {
+
     var form = document.querySelector('.categoryForm');
     form.submit();
 }
