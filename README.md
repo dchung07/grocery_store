@@ -12,8 +12,8 @@ A Grocery Store
 
     Things to work on
 
-    -> When the modal opens, the rest of the screen should be blurred slightly.
-    -> Clicking elsewhere than the modal should close the modal.
+    -> When the modal opens, the rest of the screen should be blurred slightly. (Done) -> Create a backdrop div with slight opacity and then using z-index position it behind modal but above everything else
+    -> Clicking elsewhere than the modal should close the modal. (Done if target of window is backdrop, close Modal and backdrop)
     -> Add Fruits (Done)
     -> Add All Category to display all the categories (Done) -> Added conditional statement so that if 'Category' is selected, it would display all
     Also removed the disabled from the dropdown category so it becomes a valid option.

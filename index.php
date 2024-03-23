@@ -61,55 +61,53 @@
                  $selected_category = isset($_SESSION['selected_category']) ? $_SESSION['selected_category'] : '';
     ?>
 
-    <div id="myModal" class="modal">
-        <div class="modal-content">
 
-            <div class="modal-content-header">
-                <h3>Your Cart</h3>
-                <span class="close">&times;</span>
-            </div>
-
-            <div class="modal-content-content">
-                <h6>4 item(s)</h6>
-                <div class="modal-content-card-container-container">
-                    <div class="modal-content-card-container">
-
-                        <!-- <div class="modal-content-card">
-                            <div class="modal-content-card-top">
-                                <div class="modal-logo-name">
-                                    <img src="images/food-croissant.svg" alt="">
-                                    <h6>Croissant</h6>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-content-header">
+                    <h3>Your Cart</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-content-content">
+                    <h6>4 item(s)</h6>
+                    <div class="modal-content-card-container-container">
+                        <div class="modal-content-card-container">
+                            <!-- <div class="modal-content-card">
+                                <div class="modal-content-card-top">
+                                    <div class="modal-logo-name">
+                                        <img src="images/food-croissant.svg" alt="">
+                                        <h6>Croissant</h6>
+                                    </div>
+                                    <h6>x</h6>
                                 </div>
-                                <h6>x</h6>
-                            </div>
-                            <div class="modal-content-card-bot">
-                                <div class="quantity-selector-container">
-                                    <button>-</button>
-                                    <input type="text" value="0">
-                                    <button>+</button>
+                                <div class="modal-content-card-bot">
+                                    <div class="quantity-selector-container">
+                                        <button>-</button>
+                                        <input type="text" value="0">
+                                        <button>+</button>
+                                    </div>
+                                    <h4>$3.61</h4>
                                 </div>
-                                <h4>$3.61</h4>
-                            </div>
-                        </div> -->
-
-                    </div>
-                    <div class="remove-all-container">
-                        <h4>Remove All</h4>
-                        <img src="images/delete_black_24dp.svg" alt="Delete Icon">
+                            </div> -->
+                        </div>
+                        <div class="remove-all-container">
+                            <h4>Remove All</h4>
+                            <img src="images/delete_black_24dp.svg" alt="Delete Icon">
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="modal-content-footer">
-                <h5>Order Summary</h5>
-                <div class="checkout-info">
-                    <h5>Price</h5>
-                    <button>Place an order</button>
+        
+                <div class="modal-content-footer">
+                    <h5>Order Summary</h5>
+                    <div class="checkout-info">
+                        <h5>Price</h5>
+                        <button>Place an order</button>
+                    </div>
                 </div>
+        
             </div>
-            
-        </div>
-      </div>
+          </div>
+
 
     <div class="container">
         <div class="header">
