@@ -11,47 +11,54 @@
 
     <?php
         session_start();
-        $servername = "localhost";
-                        $username = "root";
-                        $password = "";
-                        $dbname = "grocery";
+            $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "grocery";
 
-                        $conn = new mysqli($servername, $username, $password, $dbname);
+                $conn = new mysqli($servername, $username, $password, $dbname);
 
+                $sql = "SELECT * FROM products";
+
+                 //If select category option
+                if (isset($_POST['categoryDropdown']) && !empty($_POST['categoryDropdown'])) {
+                     $category = $_POST['categoryDropdown'];
+                     //Set variable to the option value
+                     $_SESSION['category'] = $category; 
+                     $_SESSION['selected_category'] = $_POST['categoryDropdown'];
+                     //Set session variable (category) to option value
+
+                     //Should change the category option to $category
+                    if($category == 'Category') {
                         $sql = "SELECT * FROM products";
+                    } else {
+                        $sql = "SELECT * FROM products WHERE category ='$category'";
+                    }
+                 } elseif(isset($_POST['searchSubmit']) && !empty($_POST['search'])) {
+                     //If click on search, set variable to search value
+                     //Set session variable (search) to search value
+                     $search = $_POST['search'];
+                     $_SESSION['search'] = $search; 
+                     //Had to unset the session for category since it was messing with the
+                     //Search session results as it had lower precedence in the conditional chain
+                     unset($_SESSION['category']);
+                     $sql = "SELECT * FROM products WHERE product_name LIKE '%$search%'";
+                 } elseif(isset($_SESSION['category'])) {
+                     //In the case of a form reset, the category previous selection will be
+                     //Higher on prevalence.
+                     $category = $_SESSION['category'];
+                     if($category == 'Category') {
+                        $sql = "SELECT * FROM products";
+                    } else {
+                        $sql = "SELECT * FROM products WHERE category ='$category'";
+                    }
+                 } elseif(isset($_SESSION['search'])) {
+                     $search = $_SESSION['search'];
 
-                        //If select category option
-                        if (isset($_POST['categoryDropdown']) && !empty($_POST['categoryDropdown'])) {
-                            $category = $_POST['categoryDropdown'];
-                            //Set variable to the option value
-                            $_SESSION['category'] = $category; 
-                            $_SESSION['selected_category'] = $_POST['categoryDropdown'];
-                            //Set session variable (category) to option value
+                     $sql = "SELECT * FROM products WHERE product_name LIKE '%$search%'";
+                 }
 
-                            //Should change the category option to $category
-
-                            $sql = "SELECT * FROM products WHERE category ='$category'";
-                        } elseif(isset($_POST['searchSubmit']) && !empty($_POST['search'])) {
-                            //If click on search, set variable to search value
-                            //Set session variable (search) to search value
-                            $search = $_POST['search'];
-                            $_SESSION['search'] = $search; 
-                            //Had to unset the session for category since it was messing with the
-                            //Search session results as it had lower precedence in the conditional chain
-                            unset($_SESSION['category']);
-                            $sql = "SELECT * FROM products WHERE product_name LIKE '%$search%'";
-                        } elseif(isset($_SESSION['category'])) {
-                            //In the case of a form reset, the category previous selection will be
-                            //Higher on prevalence.
-                            $category = $_SESSION['category'];
-                            $sql = "SELECT * FROM products WHERE category ='$category'";
-                        } elseif(isset($_SESSION['search'])) {
-                            $search = $_SESSION['search'];
-
-                            $sql = "SELECT * FROM products WHERE product_name LIKE '%$search%'";
-                        }
-
-                        $selected_category = isset($_SESSION['selected_category']) ? $_SESSION['selected_category'] : '';
+                 $selected_category = isset($_SESSION['selected_category']) ? $_SESSION['selected_category'] : '';
     ?>
 
     <div id="myModal" class="modal">
@@ -115,7 +122,7 @@
             <div class="header_middle">
                 <form class="categoryForm" method="POST" onchange="submitForm()">
                     <select class="categoryDropdown" name="categoryDropdown" id="category">
-                    <option value="" disabled <?php if(empty($selected_category)) echo 'selected'; ?>>Category</option>
+                    <option value="Category" <?php if($selected_category == 'Category') echo 'selected'; ?>>Category</option>
                     <option value="Fruit" <?php if($selected_category == 'Fruit') echo 'selected'; ?>>Fruit</option>
                     <option value="Drinks" <?php if($selected_category == 'Drinks') echo 'selected'; ?>>Drinks</option>
                     <option value="Meat" <?php if($selected_category == 'Meat') echo 'selected'; ?>>Meat</option>
@@ -147,16 +154,6 @@
                 <div class="card-container">
                     <?php
                     
-
-                        //Make dropdown Work //Resolved after just restarting xampp, and vscode
-                        //Add to Cart > Actually add to cart
-                        //Keep search results even if user adds to cart. Currently, when user adds to cart, the entire page refreshes
-                        //works with category but not with search
-                        //And search filters are reset
-                        //If customer tries to add more quantity than exists, send error, or max the quantity field to in_stock
-
-                        //2. I want to add functionality where both category and search filters can work at the same time.
-                        //3. Need to make so that the category name changes to the selected option value
                         
 
                         $result = $conn->query($sql);
