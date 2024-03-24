@@ -41,8 +41,12 @@
                      $_SESSION['search'] = $search; 
                      //Had to unset the session for category since it was messing with the
                      //Search session results as it had lower precedence in the conditional chain
-                     unset($_SESSION['category']);
+
+                     unset($_SESSION['category']); 
+                     //Perhaps we will get rid of the unset, so we can make both the category filter and search filter work together
+
                      $sql = "SELECT * FROM products WHERE product_name LIKE '%$search%'";
+
                  } elseif(isset($_SESSION['category'])) {
                      //In the case of a form reset, the category previous selection will be
                      //Higher on prevalence.
@@ -53,6 +57,8 @@
                         $sql = "SELECT * FROM products WHERE category ='$category'";
                     }
                  } elseif(isset($_SESSION['search'])) {
+                    
+
                      $search = $_SESSION['search'];
 
                      $sql = "SELECT * FROM products WHERE product_name LIKE '%$search%'";
@@ -167,11 +173,13 @@
                                 echo '<h5>' . $row['product_name'] . '</h5>';
                                 echo '<form class="card_submit_form" action="index.php" method="post">';
                                 echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
-                                echo 'Quantity: <input type="number" name="quantity" value="0" min="1"><br>';
+                                
                                 
                                 if($row['in_stock'] == 0) {
-                                    echo '<button class="addCartBtn" type="button" disabled>Out of Stock</button>';
+                                    echo 'Quantity: <input type="number" name="quantity" disabled><br>';
+                                    echo '<button class="outOfStockBtn" type="button" disabled>Out of Stock</button>';
                                 } else {
+                                    echo 'Quantity: <input type="number" name="quantity" value="0" min="1"><br>';
                                     echo '<button class="addCartBtn" type="submit" name="add_to_cart">Add to Cart</button>';
                                 }
 

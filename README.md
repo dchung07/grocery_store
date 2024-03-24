@@ -17,3 +17,13 @@ A Grocery Store
     -> Add Fruits (Done)
     -> Add All Category to display all the categories (Done) -> Added conditional statement so that if 'Category' is selected, it would display all
     Also removed the disabled from the dropdown category so it becomes a valid option.
+
+    To-Do
+    -> Look into the dropdown having sub-categories
+    -> Add functionality to sub-categories
+    Do this through a modal and js. Open up the sub-categories after putting display as none.
+    Should loop through each of the different sub-categories, and attach each as an option
+
+    -> If out of stock, don't let quantity to be moved up or down, and don't add the hover on click animation either (Done) -> Disabled hover over the out of stock items and disabled quantity input too.
+
+

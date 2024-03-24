@@ -152,14 +152,26 @@
     align-items: center;
 }
 
-.card > form > button {
+/* .card > form > button {
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 5px 12px;
+} */
+
+.addCartBtn {
     padding: 8px 16px;
     border: 1px solid transparent;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 5px 12px;
 }
 
-.card > form > button:hover {
+.addCartBtn:hover {
     opacity: 0.7;
+}
+
+.outOfStockBtn {
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 5px 12px;
 }
 
 .backdrop {
