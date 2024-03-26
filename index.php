@@ -65,6 +65,8 @@
                  }
 
                  $selected_category = isset($_SESSION['selected_category']) ? $_SESSION['selected_category'] : '';
+
+
     ?>
 
 
@@ -139,8 +141,46 @@
                 </form>
             </div>
 
+            <?php
+                    //Code for Add to Cart Functionality
+                    if (!isset($_SESSION['cart'])) {
+                       $_SESSION['cart'] = [];
+                   }
+                   
+                   if(isset($_POST['add_to_cart'])) {
+                       $product_id = $_POST['product_id'];
+                       $quantity = $_POST['quantity'];
+                       
+                       if(isset($_SESSION['cart'][$product_id])) {
+                           $_SESSION['cart'][$product_id] += $quantity;
+                       } else {
+                           $_SESSION['cart'][$product_id] = $quantity;
+                       }
+                   }
+
+                   $totalQuantity = 0;
+                    foreach ($_SESSION['cart'] as $quantity) {
+                        $totalQuantity += $quantity;
+                    }
+                   
+                   echo "<h1>Cart Contents:</h1>";
+                   if(empty($_SESSION['cart'])) {
+                       echo "<p>Your cart is empty.</p>";
+                   } else {
+                       echo "<ul>";
+                       foreach ($_SESSION['cart'] as $product_id => $quantity) {
+                           echo "<li>Product ID: $product_id, Quantity: $quantity</li>";
+                       }
+                       echo "</ul>";
+                    }                
+            ?>
+                
             <form class="shopping" action="index.php" method="POST">
-                <img class="shoppingCartIcon" src="images/cart.svg" alt="shopping cart">
+                <div class="cart_update_top">
+                    <img class="shoppingCartIcon" src="images/cart.svg" alt="shopping cart">
+                    <h4><?php echo"$totalQuantity" ?></h4>
+                </div>
+                <h3>$0.00</h3>
             </form>
 
         </div>
@@ -158,8 +198,6 @@
                 <div class="card-container">
                     <?php
                     
-                        
-
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
@@ -175,13 +213,13 @@
                                 echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
                                 
                                 
-                                if($row['in_stock'] == 0) {
-                                    echo 'Quantity: <input type="number" name="quantity" disabled><br>';
-                                    echo '<button class="outOfStockBtn" type="button" disabled>Out of Stock</button>';
-                                } else {
-                                    echo 'Quantity: <input type="number" name="quantity" value="0" min="1"><br>';
-                                    echo '<button class="addCartBtn" type="submit" name="add_to_cart">Add to Cart</button>';
-                                }
+                                    if($row['in_stock'] == 0) {
+                                        echo 'Quantity: <input type="number" name="quantity" disabled><br>';
+                                        echo '<button class="outOfStockBtn" type="button" disabled>Out of Stock</button>';
+                                    } else {
+                                        echo 'Quantity: <input type="number" name="quantity" value="0" min="1"><br>';
+                                        echo '<button class="addCartBtn" type="submit" name="add_to_cart">Add to Cart</button>';
+                                    }
 
                                 echo '</form>';
                                 echo '</div>';

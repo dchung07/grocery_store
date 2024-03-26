@@ -26,4 +26,8 @@ A Grocery Store
 
     -> If out of stock, don't let quantity to be moved up or down, and don't add the hover on click animation either (Done) -> Disabled hover over the out of stock items and disabled quantity input too.
 
+    ->Send added items to the cart
+    ->Add a text next to the cart icon so it can be updated when the add_to_cart is clicked
+    ->Add count of items (quantity) & total cost of items 
+
 

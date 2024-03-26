@@ -36,6 +36,10 @@
     border: 1px solid black;
 }
 
+.cart_update_top {
+    display: flex;
+}
+
 .header {
     display: flex;
     align-items: center;
