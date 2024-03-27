@@ -114,7 +114,7 @@
                 </div>
         
             </div>
-          </div>
+        </div>
 
 
     <div class="container">
@@ -143,42 +143,37 @@
 
             <?php
                     //Code for Add to Cart Functionality
-                    if (!isset($_SESSION['cart'])) {
-                       $_SESSION['cart'] = [];
-                   }
-                   
-                   if(isset($_POST['add_to_cart'])) {
-                       $product_id = $_POST['product_id'];
-                       $quantity = $_POST['quantity'];
-                       
-                       if(isset($_SESSION['cart'][$product_id])) {
-                           $_SESSION['cart'][$product_id] += $quantity;
-                       } else {
-                           $_SESSION['cart'][$product_id] = $quantity;
-                       }
-                   }
-
-                   $totalQuantity = 0;
-                    foreach ($_SESSION['cart'] as $quantity) {
-                        $totalQuantity += $quantity;
+                    if(!isset($_SESSION['cart'])) {
+                        $_SESSION['cart'] = array();
                     }
-                   
-                   echo "<h1>Cart Contents:</h1>";
-                   if(empty($_SESSION['cart'])) {
-                       echo "<p>Your cart is empty.</p>";
-                   } else {
-                       echo "<ul>";
-                       foreach ($_SESSION['cart'] as $product_id => $quantity) {
-                           echo "<li>Product ID: $product_id, Quantity: $quantity</li>";
-                       }
-                       echo "</ul>";
-                    }                
+
+                    if(isset($_POST['add_to_cart'])) {
+                        $product_id = $_POST['product_id'];
+                        $quantity = $_POST['quantity'];
+                        $product_name = $_POST['product_name'];
+                        $unit_price = $_POST['unit_price'];
+                        $unit_quantity = $_POST['unit_quantity'];
+
+                        $_SESSION['cart'][$product_id] = array(
+                            "quantity" => $quantity,
+                            "product_name" => $product_name,
+                            "unit_price" => $unit_price,
+                            "unit_quantity" => $unit_quantity
+                        );
+
+                        echo "<p>Product ID: $product_id</p>";
+                        echo "<p>Quantity: $quantity</p>";
+                        echo "<p>Product Name: $product_name</p>";
+                        echo "<p>Unit Price: $unit_price</p>";
+                        echo "<p>Unit Quantity: $unit_quantity</p>";
+                    }
+
             ?>
                 
             <form class="shopping" action="index.php" method="POST">
                 <div class="cart_update_top">
                     <img class="shoppingCartIcon" src="images/cart.svg" alt="shopping cart">
-                    <h4><?php echo"$totalQuantity" ?></h4>
+                    <!-- <h4><?php echo"$totalQuantity" ?></h4> -->
                 </div>
                 <h3>$0.00</h3>
             </form>
@@ -207,10 +202,13 @@
                                 echo '<div class="card">';
                                 // echo '<img src="' . $row['image_url'] . '" alt="' . $row['name'] . '">';
                                 echo '<img src="images/food-croissant.svg" alt="">';
+                                echo '<form class="card_submit_form" action="index.php" method="post">';
                                 echo '<h4>' . $row['unit_price'] . '/' . $row['unit_quantity'] . '</h4>';
                                 echo '<h5>' . $row['product_name'] . '</h5>';
-                                echo '<form class="card_submit_form" action="index.php" method="post">';
                                 echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
+                                echo '<input type="hidden" name="product_name" value="' . $row['product_name'] . '">';
+                                echo '<input type="hidden" name="unit_price" value="' . $row['unit_price'] . '">';
+                                echo '<input type="hidden" name="unit_quantity" value="' . $row['unit_quantity'] . '">';
                                 
                                 
                                     if($row['in_stock'] == 0) {

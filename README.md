@@ -31,3 +31,21 @@ A Grocery Store
     ->Add count of items (quantity) & total cost of items 
 
 
+    ->Use associative array in following structure
+
+    $cart = array(
+        "product_id_1" => array(
+            "quantity" => 2,
+            "unit_price" => 3.00,
+            "product_name" => "bread",
+            "unit_quantity" => "1L"
+        ),
+        "product_id_2" => array(
+            "quantity" => 2,
+            "unit_price" => 3.00,
+            "product_name" => "bread",
+            "unit_quantity" => "1L"
+        ),
+    );
+
+    ->Session lifecycle (Adjust time and destroy unused sessions after x period of time)
