@@ -161,11 +161,10 @@
                             "unit_quantity" => $unit_quantity
                         );
 
-                        echo "<p>Product ID: $product_id</p>";
-                        echo "<p>Quantity: $quantity</p>";
-                        echo "<p>Product Name: $product_name</p>";
-                        echo "<p>Unit Price: $unit_price</p>";
-                        echo "<p>Unit Quantity: $unit_quantity</p>";
+                        echo"<p>" . $_SESSION['cart'][$product_id]["quantity"] . "</p>";
+                        echo"<p>" . $_SESSION['cart'][$product_id]["product_name"] . "</p>";
+                        echo"<p>" . $_SESSION['cart'][$product_id]["unit_price"] . "</p>";
+                        echo"<p>" . $_SESSION['cart'][$product_id]["unit_quantity"] . "</p>";
                     }
 
             ?>
