@@ -21,15 +21,26 @@
     font-size: 2rem;
 }
 
-.shopping > img {
+/* .shopping > img {
+    width: 80px;
+    height: 80px;
+} */
+
+.shoppingCartIcon {
     width: 40px;
-    height: 40px;
 }
 
 .shopping {
     border: 1px solid transparent;
     border-radius: 32px;
     padding: 4px 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.shopping > h3 {
+    text-align: center;
+    margin-right: 8px;
 }
 
 .shopping:hover {

@@ -160,11 +160,34 @@
                             "unit_price" => $unit_price,
                             "unit_quantity" => $unit_quantity
                         );
+                        
+                        // foreach ($_SESSION['cart'] as $product_id => $content) {
+                        //     echo "<p>Product ID: $product_id</p>";
+                        //     echo "<ul>";
+                        //     echo "<li>Quantity: " . $content['quantity'] . "</li>";
+                        //     echo "<li>Product Name: " . $content['product_name'] . "</li>";
+                        //     echo "<li>Unit Price: " . $content['unit_price'] . "</li>";
+                        //     echo "<li>Unit Quantity: " . $content['unit_quantity'] . "</li>";
+                        //     echo "</ul>";
+                        // }
 
-                        echo"<p>" . $_SESSION['cart'][$product_id]["quantity"] . "</p>";
-                        echo"<p>" . $_SESSION['cart'][$product_id]["product_name"] . "</p>";
-                        echo"<p>" . $_SESSION['cart'][$product_id]["unit_price"] . "</p>";
-                        echo"<p>" . $_SESSION['cart'][$product_id]["unit_quantity"] . "</p>";
+                        //Find total quantity of items
+                        $totalQuantity = 0;
+                        foreach($_SESSION['cart'] as $product_id => $content) {
+                            $totalQuantity += $content['quantity'];
+                        }
+
+                        //Find total price of items
+                        $totalPrice = 0.00;
+                        foreach($_SESSION['cart'] as $product_id => $content) {
+                            $totalPrice += $content['unit_price'];
+                        }
+
+                        
+                        // echo"<p>" . $_SESSION['cart'][$product_id]["quantity"] . "</p>";
+                        // echo"<p>" . $_SESSION['cart'][$product_id]["product_name"] . "</p>";
+                        // echo"<p>" . $_SESSION['cart'][$product_id]["unit_price"] . "</p>";
+                        // echo"<p>" . $_SESSION['cart'][$product_id]["unit_quantity"] . "</p>";
                     }
 
             ?>
@@ -172,9 +195,9 @@
             <form class="shopping" action="index.php" method="POST">
                 <div class="cart_update_top">
                     <img class="shoppingCartIcon" src="images/cart.svg" alt="shopping cart">
-                    <!-- <h4><?php echo"$totalQuantity" ?></h4> -->
+                    <h4><?php echo"$totalQuantity" ?></h4>
                 </div>
-                <h3>$0.00</h3>
+                <h3><?php echo"$$totalPrice" ?></h3>
             </form>
 
         </div>
