@@ -86,16 +86,28 @@
                         $quantity = $_POST['quantity'];
                         $unit_price = $_POST['unit_price'];
                         $unit_quantity = $_POST['unit_quantity'];
+
+                        if(isset($_SESSION['cart'][$product_id])) {
+                            $_SESSION['cart'][$product_id]['quantity'] += $quantity;
+                        } else {
+                            $_SESSION['cart'][$product_id] = array(
+                                "quantity" => $quantity,
+                                "product_name" => $product_name,
+                                "unit_price" => $unit_price,
+                                "unit_quantity" => $unit_quantity
+                            );
+                        }
+
+                        $_SESSION['totalQuantity'] = 0;
+                        $_SESSION['totalPrice'] = 0;
+
+                        foreach($_SESSION['cart'] as $product_id => $content) {
+                            $_SESSION['totalQuantity'] += $content['quantity'];
+                            $_SESSION['totalPrice'] += ($content['quantity'] * $content['unit_price']);
+                        }
                     
-                        $_SESSION['cart'][$product_id] = array(
-                            "quantity" => $quantity,
-                            "product_name" => $product_name,
-                            "unit_price" => $unit_price,
-                            "unit_quantity" => $unit_quantity
-                        );
-                    
-                        $_SESSION['totalQuantity'] += $quantity;
-                        $_SESSION['totalPrice'] += ($quantity * $unit_price);
+                        // $_SESSION['totalQuantity'] += $quantity;
+                        // $_SESSION['totalPrice'] += ($quantity * $unit_price);
                     }
 
                     if (isset($_POST['remove_all'])) {
