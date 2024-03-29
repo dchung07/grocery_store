@@ -80,7 +80,7 @@
                         $_SESSION['totalPrice'] = 0.00;
                     }
                     
-                    if (isset($_POST['add_to_cart'])) {
+                    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_to_cart'])) {
                         $product_id = $_POST['product_id'];
                         $product_name = $_POST['product_name'];
                         $quantity = $_POST['quantity'];
@@ -108,9 +108,12 @@
                     
                         // $_SESSION['totalQuantity'] += $quantity;
                         // $_SESSION['totalPrice'] += ($quantity * $unit_price);
+
+                        header("Location: ".$_SERVER['REQUEST_URI']);
+                        exit();
                     }
 
-                    if (isset($_POST['remove_all'])) {
+                    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['remove_all'])) {
                         $_SESSION['cart'] = array();
                         $_SESSION['totalQuantity'] = 0;
                         $_SESSION['totalPrice'] = 0.00;
