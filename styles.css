@@ -49,6 +49,15 @@
 
 .cart_update_top {
     display: flex;
+    align-items: flex-start; 
+    /* Prevents Stretching of elements to fit height of items next to it. e.g. with cart and the quantity indicator */
+}
+
+.cart_update_top > h4 {
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    padding: 5px;
 }
 
 .header {
