@@ -57,7 +57,8 @@
     background-color: red;
     border-radius: 50%;
     color: white;
-    padding: 5px;
+    padding: 5px 8px;
+    font-size: 12px;
 }
 
 .header {
@@ -388,6 +389,18 @@ span {
     padding: 1rem;
     justify-content: center;
     align-items: center;
+}
+
+.remove-all-container > button {
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.remove-all-container > button:hover {
+    background: rgba(181, 182, 183, 0.5);
 }
 
 /* .modal-content-card-container-container {

@@ -49,3 +49,5 @@ A Grocery Store
     );
 
     ->Session lifecycle (Adjust time and destroy unused sessions after x period of time)
+
+    -> Make remove functionality. Also change the variables to include sessions

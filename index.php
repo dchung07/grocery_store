@@ -66,62 +66,47 @@
 
                  $selected_category = isset($_SESSION['selected_category']) ? $_SESSION['selected_category'] : '';
 
-
-    ?>
-
-                <?php
                     //Code for Add to Cart Functionality
-                    if(!isset($_SESSION['cart'])) {
+
+                    if (!isset($_SESSION['cart'])) {
                         $_SESSION['cart'] = array();
                     }
-
-                    if(isset($_POST['add_to_cart'])) {
+                    
+                    if (!isset($_SESSION['totalQuantity'])) {
+                        $_SESSION['totalQuantity'] = 0;
+                    }
+                    
+                    if (!isset($_SESSION['totalPrice'])) {
+                        $_SESSION['totalPrice'] = 0.00;
+                    }
+                    
+                    if (isset($_POST['add_to_cart'])) {
                         $product_id = $_POST['product_id'];
-                        $quantity = $_POST['quantity'];
                         $product_name = $_POST['product_name'];
+                        $quantity = $_POST['quantity'];
                         $unit_price = $_POST['unit_price'];
                         $unit_quantity = $_POST['unit_quantity'];
-
+                    
                         $_SESSION['cart'][$product_id] = array(
                             "quantity" => $quantity,
                             "product_name" => $product_name,
                             "unit_price" => $unit_price,
                             "unit_quantity" => $unit_quantity
                         );
-                        
-                        // foreach ($_SESSION['cart'] as $product_id => $content) {
-                        //     echo "<p>Product ID: $product_id</p>";
-                        //     echo "<ul>";
-                        //     echo "<li>Quantity: " . $content['quantity'] . "</li>";
-                        //     echo "<li>Product Name: " . $content['product_name'] . "</li>";
-                        //     echo "<li>Unit Price: " . $content['unit_price'] . "</li>";
-                        //     echo "<li>Unit Quantity: " . $content['unit_quantity'] . "</li>";
-                        //     echo "</ul>";
-                        // }
-
-                        //Find total quantity of items
-                        $totalQuantity = 0;
-                        foreach($_SESSION['cart'] as $product_id => $content) {
-                            $totalQuantity += $content['quantity'];
-                        }
-
-                        //Find total price of items
-                        $totalPrice = 0.00;
-                        foreach($_SESSION['cart'] as $product_id => $content) {
-                            $totalPrice += $content['unit_price'];
-                        }
-
-                        
-                        // echo"<p>" . $_SESSION['cart'][$product_id]["quantity"] . "</p>";
-                        // echo"<p>" . $_SESSION['cart'][$product_id]["product_name"] . "</p>";
-                        // echo"<p>" . $_SESSION['cart'][$product_id]["unit_price"] . "</p>";
-                        // echo"<p>" . $_SESSION['cart'][$product_id]["unit_quantity"] . "</p>";
-                    } else {
-                        $totalQuantity = 0;
-                        $totalPrice = 0.00;
+                    
+                        $_SESSION['totalQuantity'] += $quantity;
+                        $_SESSION['totalPrice'] += ($quantity * $unit_price);
                     }
 
-                ?>
+                    if (isset($_POST['remove_all'])) {
+                        $_SESSION['cart'] = array();
+                        $_SESSION['totalQuantity'] = 0;
+                        $_SESSION['totalPrice'] = 0.00;
+                    }
+                    
+
+
+                    ?>
 
 
         <div id="myModal" class="modal">
@@ -131,7 +116,7 @@
                     <span class="close">&times;</span>
                 </div>
                 <div class="modal-content-content">
-                    <h6><?php echo"$totalQuantity item(s)" ?></h6>
+                    <h6><?php echo $_SESSION['totalQuantity'] . " item(s)" ?></h6>
                     <div class="modal-content-card-container-container">
                         <div class="modal-content-card-container">
                             <!-- <div class="modal-content-card">
@@ -152,10 +137,10 @@
                                 </div>
                             </div> -->
                         </div>
-                        <div class="remove-all-container">
-                            <h4>Remove All</h4>
-                            <img src="images/delete_black_24dp.svg" alt="Delete Icon">
-                        </div>
+                        <form class="remove-all-container" action = "index.php" method="POST">
+                            <button type="submit" name="remove_all">Remove All<img src="images/delete_black_24dp.svg" alt="Delete Icon"></button>
+                            
+                        </form>
                     </div>
                 </div>
         
@@ -198,9 +183,9 @@
             <form class="shopping" action="index.php" method="POST">
                 <div class="cart_update_top">
                     <img class="shoppingCartIcon" src="images/cart.svg" alt="shopping cart">
-                    <h4><?php echo"$totalQuantity"; ?></h4>
+                    <h4><?php echo $_SESSION['totalQuantity']; ?></h4>
                 </div>
-                <h3><?php echo"$$totalPrice"; ?></h3>
+                <h3><?php echo "$" . $_SESSION['totalPrice']; ?></h3>
             </form>
 
         </div>
