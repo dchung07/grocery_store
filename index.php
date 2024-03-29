@@ -116,8 +116,6 @@
                         $_SESSION['totalPrice'] = 0.00;
                     }
                     
-
-
                     ?>
 
 
@@ -148,6 +146,30 @@
                                     <h4>$3.61</h4>
                                 </div>
                             </div> -->
+
+                            <?php
+                                foreach($_SESSION['cart'] as $product_id => $content) {
+                                    echo '<div class="modal-content-card">';
+                                        echo '<div class="modal-content-card-top">';
+                                            echo '<div class="modal-logo-name">';
+                                                echo '<img src="images/food-croissant.svg" alt="">';
+                                                echo '<h6>' . $content['product_name'] . '</h6>';
+                                            echo '</div>';
+                                            echo '<h6>x</h6>';
+                                        echo '</div>';
+
+                                        echo '<div class="modal-content-card-bot">';
+                                            echo '<div class="quantity-selector-container">';
+                                                echo '<button>-</button>';
+                                                echo '<input type="text" value="' . $content['quantity'] . '">';
+                                                echo '<button>+</button>';
+                                            echo '</div>';
+                                            echo '<h4>' . $content['unit_price'] . '</h4>';
+                                        echo '</div>';
+                                    echo '</div>';
+                                };
+                            ?>
+
                         </div>
                         <form class="remove-all-container" action = "index.php" method="POST">
                             <button type="submit" name="remove_all">Remove All<img src="images/delete_black_24dp.svg" alt="Delete Icon"></button>

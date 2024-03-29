@@ -51,3 +51,7 @@ A Grocery Store
     ->Session lifecycle (Adjust time and destroy unused sessions after x period of time)
 
     -> Make remove functionality. Also change the variables to include sessions
+
+    -> When appending the items to the cart modal, loop through the product_id's in the session cart array, and append items accordinly using the html template that is created
+
+    -> Error when refreshing the page, another instance of the items is automatically added to the cart.
