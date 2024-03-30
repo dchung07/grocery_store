@@ -59,3 +59,12 @@ A Grocery Store
     -> Work on sending data to the next page
 
     -> Disable place order button if the cart is empty. Check if cart session is empty. If empty disable, else able to be clicked
+
+    -> To-Do on main page
+    -> Allow quantity change of items
+    -> Allow removal of items
+
+    -> Removal of Item
+    -> Put the x button in the form
+    -> Send through product_id.
+    -> $_POST[''] -> $_SESSION['cart']['product_id]

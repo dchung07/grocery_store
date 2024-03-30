@@ -66,6 +66,8 @@
 
                  $selected_category = isset($_SESSION['selected_category']) ? $_SESSION['selected_category'] : '';
 
+
+
                     //Code for Add to Cart Functionality
 
                     if (!isset($_SESSION['cart'])) {
@@ -106,9 +108,6 @@
                             $_SESSION['totalPrice'] += ($content['quantity'] * $content['unit_price']);
                         }
                     
-                        // $_SESSION['totalQuantity'] += $quantity;
-                        // $_SESSION['totalPrice'] += ($quantity * $unit_price);
-
                         header("Location: ".$_SERVER['REQUEST_URI']);
                         exit();
                         //This code is to prevent resubmission of the form which was happening during refresh of the page, causing the cart to keep adding items automatically
@@ -119,6 +118,11 @@
                         $_SESSION['cart'] = array();
                         $_SESSION['totalQuantity'] = 0;
                         $_SESSION['totalPrice'] = 0.00;
+                    }
+
+                    if(isset($_POST['deleteItem'])) {
+                        $product_id = $_POST['product_id'];
+                        unset($_SESSION['cart'][$product_id]);
                     }
 
 
@@ -164,7 +168,12 @@
                                                 echo '<img src="images/food-croissant.svg" alt="">';
                                                 echo '<h6>' . $content['product_name'] . '</h6>';
                                             echo '</div>';
-                                            echo '<h6>x</h6>';
+
+                                            echo '<form action="index.php" method="POST">';
+                                                echo '<input type="hidden" name="product_id" value="'. $product_id .'">';
+                                                echo '<input type="submit" name="deleteItem" value="x">';
+                                            echo '</form>';
+
                                         echo '</div>';
 
                                         echo '<div class="modal-content-card-bot">';
