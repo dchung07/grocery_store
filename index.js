@@ -52,6 +52,35 @@ window.addEventListener('click', function(event) {
 
 function submitForm() {
 
-    var form = document.querySelector('.categoryForm');
+    let form = document.querySelector('.categoryForm');
     form.submit();
+}
+
+//AJAX cart quantity change
+
+function increaseQuantity() {
+    let quantityField = document.getElementById('cartQuantity');
+    quantityField.value = parseInt(quantityField.value) + 1;
+    submitForm('increase');
+}
+
+function decreaseQuantity() {
+    let quantityField = document.getElementById('cartQuantity');
+    if (parseInt(quantityField.value) > 1) {
+        quantityField.value = parseInt(quantityField.value) - 1;
+        submitForm('decrease');
+    }
+}
+
+function submitForm(action) {
+    let form = document.getElementById('cartForm');
+    let formData = new FormData(form);
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "index.php", true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+
+        }
+    };
+    xhr.send(formData);
 }

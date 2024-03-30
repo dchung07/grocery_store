@@ -55,3 +55,7 @@ A Grocery Store
     -> When appending the items to the cart modal, loop through the product_id's in the session cart array, and append items accordinly using the html template that is created
 
     -> Error when refreshing the page, another instance of the items is automatically added to the cart.
+
+    -> Work on sending data to the next page
+
+    -> Disable place order button if the cart is empty. Check if cart session is empty. If empty disable, else able to be clicked

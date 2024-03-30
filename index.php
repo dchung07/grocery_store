@@ -111,6 +111,8 @@
 
                         header("Location: ".$_SERVER['REQUEST_URI']);
                         exit();
+                        //This code is to prevent resubmission of the form which was happening during refresh of the page, causing the cart to keep adding items automatically
+                        //On page refresh which was unintended
                     }
 
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['remove_all'])) {
@@ -118,6 +120,10 @@
                         $_SESSION['totalQuantity'] = 0;
                         $_SESSION['totalPrice'] = 0.00;
                     }
+
+
+
+
                     
                     ?>
 
@@ -163,9 +169,15 @@
 
                                         echo '<div class="modal-content-card-bot">';
                                             echo '<div class="quantity-selector-container">';
-                                                echo '<button>-</button>';
-                                                echo '<input type="text" value="' . $content['quantity'] . '">';
-                                                echo '<button>+</button>';
+
+                                                echo '<form id="cartForm" action="index.php" method="POST">';
+                                                    echo '<input type="hidden" name="product_id" value="' . $product_id . '">';
+                                                    
+                                                    echo '<input type="button" onclick="decreaseQuantity()" value="-">';
+                                                    echo '<input type="text" id="cartQuantity" name="cartQuantity" value="' . $content['quantity'] . '" readonly>';
+                                                    echo '<input type="button" onclick="increaseQuantity()" value="+">';
+
+                                                echo '</form>';
                                             echo '</div>';
                                             echo '<h4>' . $content['unit_price'] . '</h4>';
                                         echo '</div>';
@@ -184,8 +196,14 @@
                 <div class="modal-content-footer">
                     <h5>Order Summary</h5>
                     <div class="checkout-info">
-                        <h5>Price</h5>
-                        <button>Place an order</button>
+                        <h5><?php echo'Total Price: $' . $_SESSION['totalPrice']; ?></h5>
+                        <?php
+                            if(empty($_SESSION['cart'])){
+                                echo "<button type='button' disabled>Nothing to order</button>";
+                            } else {
+                                echo "<button type='button'>Place an order</button>";
+                            }
+                        ?>
                     </div>
                 </div>
         
