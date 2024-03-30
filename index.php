@@ -122,7 +122,25 @@
 
                     if(isset($_POST['deleteItem'])) {
                         $product_id = $_POST['product_id'];
+                        $quantity = $_POST['quantity'];
+                        $unit_price = $_POST['unit_price'];
+
+                        echo '<h1>'. $product_id .'</h1>';
+                        echo '<h1>'. $_SESSION['cart'][$product_id]['product_name'] .'</h1>';
+                        echo '<h1>'. $_SESSION['cart'][$product_id]['quantity'] .'</h1>';
+                        echo '<h1>'. $_SESSION['cart'][$product_id]['unit_price'] .'</h1>';
+
+                        $quantity = $_SESSION['cart'][$product_id]['quantity'];
+                        $unit_price = $_SESSION['cart'][$product_id]['unit_price'];
+
+                        $_SESSION['totalQuantity'] -= $_SESSION['cart'][$product_id]['quantity'];
+                        $_SESSION['totalPrice'] -= ($quantity * $unit_price);
+
                         unset($_SESSION['cart'][$product_id]);
+
+                        header("Location: ".$_SERVER['REQUEST_URI']);
+                        exit();
+
                     }
 
 
@@ -171,6 +189,8 @@
 
                                             echo '<form action="index.php" method="POST">';
                                                 echo '<input type="hidden" name="product_id" value="'. $product_id .'">';
+                                                echo '<input type="hidden" name="unit_price" value="' . $content['unit_price'] . '">';
+                                                echo '<input type="hidden" name="quantity" value="' . $content['quantity'] . '">';
                                                 echo '<input type="submit" name="deleteItem" value="x">';
                                             echo '</form>';
 

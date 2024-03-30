@@ -68,3 +68,5 @@ A Grocery Store
     -> Put the x button in the form
     -> Send through product_id.
     -> $_POST[''] -> $_SESSION['cart']['product_id]
+
+    -> there is an error, 
