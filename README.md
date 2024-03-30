@@ -70,3 +70,10 @@ A Grocery Store
     -> $_POST[''] -> $_SESSION['cart']['product_id]
 
     -> there is an error, 
+
+    -> Figure out quantity selector
+    Quantity Selector is weird case because submitting a form each time the indicator moves up or down would be too annoying, especially refreshing the page each time
+
+    -> For convenience when removing an item from the cart, instantly create the modal
+
+    -> Send session to the checkout page.

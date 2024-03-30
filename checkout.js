@@ -1,7 +1,7 @@
 const backToHome = document.querySelector('.left-side');
 
 backToHome.addEventListener('click', function() {
-    window.location.href = "index.html";
+    window.location.href = "index.php";
 });
 
 //Form Validation Client Side

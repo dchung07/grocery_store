@@ -230,10 +230,14 @@
                             if(empty($_SESSION['cart'])){
                                 echo "<button type='button' disabled>Nothing to order</button>";
                             } else {
-                                echo "<button type='button'>Place an order</button>";
+                                echo '<form action="checkout.html" method="POST">';
+                                    $serialized_cart = serialize($_SESSION['cart']);
+                                    echo '<input type="hidden" name="cart" value="' . htmlspecialchars($serialized_cart) . '">';
+                                    echo "<button type='submit'>Place an order</button>";
+                                echo '</form>';
                             }
                         ?>
-                    </div>
+                    </div>              
                 </div>
         
             </div>
