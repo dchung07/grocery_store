@@ -84,3 +84,7 @@ A Grocery Store
 
     -> Style the checkout page. 
     -> Make submit button interactive (hover)
+
+    -> Make font Better
+
+    -> Add images to file and adjust sql database schema to include image field
