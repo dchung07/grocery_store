@@ -81,3 +81,6 @@ A Grocery Store
     -> only allow quantity max to be up to the in_stock value of the item
 
     -> Finish Aesthetic Layout of cart information in the checkout page.
+
+    -> Style the checkout page. 
+    -> Make submit button interactive (hover)
