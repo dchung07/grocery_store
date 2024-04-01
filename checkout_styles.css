@@ -46,7 +46,8 @@ input {
 
 .content {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .checkout-form {
@@ -101,3 +102,12 @@ input {
 .address-top-container {
     display: flex;
 }
+
+/* .cart-content {
+    margin-top: 1rem;
+}
+
+.checkout-ul {
+    list-style: none;
+
+} */

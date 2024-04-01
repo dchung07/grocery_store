@@ -1,48 +1,96 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+    <link rel="stylesheet" href="checkout_styles.css">
+    <script src="checkout.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="left-side">
+                <img src="images/chevron_left_black_24dp.svg" alt="Left Arrow">
+                <h3>Continue Shopping</h3>
+            </div>
+            <div class="logo-container">
+                <div class="logo">
+                    <h3>Foodies</h3>
+                    <img src="images/food-croissant.svg" alt="logo">
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <form class="checkout-form" action="checkout.php" method="POST">
+                <div class="name-container">
+                    <div class="sub-form">
+                        <label for="first_name">First Name:</label>
+                        <input class="first_name" type="text" name="first_name" maxlength = "25" required placeholder="Tom...">
+                    </div>
+                    <div class="sub-form">
+                        <label for="last_name">Last Name:</label>
+                        <input class="last_name" type="text" name="last_name" maxlength = "25" required placeholder="Smith...">
+                    </div>
+                </div>
+                
+                <div class="address-top-container">
+                    <div class="sub-form">
+                        <label for="street">Street:</label>
+                        <input class="street" type="text" name="street" required placeholder="...">
+                    </div>
+                </div>
 
-function sanitize_input($data) {
+                <div class="address-bot-container">
+                    <div class="sub-form">
+                        <label for="city">City/Suburb:</label>
+                        <input class="city" type="text" name="city" required placeholder="...">
+                    </div>
+                    <div class="sub-form">
+                    <label for="states">State:</label>
+                        <select required name="state">
+                            <option value="VIC">VIC</option>
+                            <option value="ACT">ACT</option>
+                            <option value="NSW">NSW</option>
+                            <option value="NT ">NT</option>
+                            <option value="QLD">QLD</option>
+                            <option value="SA ">SA</option>
+                            <option value="TAS">TAS</option>
+                            <option value="WA ">WA</option>
+                        </select>
+                    </div>
+                </div>
 
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
+                <div class="phone-email-container">
+                    <div class="sub-form">
+                        <label for="phone">Phone Number:</label>
+                        <input class="phone" type="tel" name="phone" required placeholder="0401112342">
+                    </div>
+                    <div class="sub-form">
+                        <label for="email">Email:</label>
+                        <input class="email" type="email" name="email" required placeholder="tomsmith@gmail.com">
+                    </div>
+                </div>
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                <input id="submit" type="submit" name="submit" value="Confirm Order" disabled>
 
-    $first_name = sanitize_input($_POST["first_name"]);
-    $last_name = sanitize_input($_POST["last_name"]);
-    $street = sanitize_input($_POST["street"]);
-    $city = sanitize_input($_POST["city"]);
-    $state = sanitize_input($_POST["state"]);
-    $phone = sanitize_input($_POST["phone"]);
-    $email = sanitize_input($_POST["email"]);
+            </form>
 
-    echo "<h2>Form Data:</h2>";
-    echo "First Name: $first_name<br>";
-    echo "Last Name: $last_name<br>";
-    echo "Street: $street<br>";
-    echo "City: $city<br>";
-    echo "State: $state<br>";
-    echo "Phone: $phone<br>";
-    echo "Email: $email<br>";
+            <?php
+                // $cart = unserialize($_POST['cart']);
+                // if (!empty($cart) && is_array($cart)) {
+                //     echo "<h2 class='cart-content'>Cart Contents:</h2>";
+                //     echo "<ul class='checkout-ul'>";
+                //     foreach ($cart as $product_id => $item) {
+                //         echo "<li>{$item['product_name']} - Quantity: {$item['quantity']}, Unit Price: {$item['unit_price']}, Unit Quantity: {$item['unit_quantity']}</li>";
+                //     }
+                //     echo "</ul>";
+                // } else {
+                //     echo "<p>Cart is empty or invalid.</p>";
+                // }
+            ?>
 
-
-    // $to = $email;
-    // $subject = "Foodies Grocery Order";
-    // $message = "This is a test";
-    // $headers = "From: foodies@gmail.com";
-    
-    // if(mail($to, $subject, $message, $headers)) {
-    //     echo "Email sent!";
-    // } else {
-    //     echo "Email send failed.";
-    // }
-
-}
-
-?>
-
-<!-- 
-    Sanitise php form inputs before sending to database
- -->
+        </div>
+    </div>
+</body>
+</html>

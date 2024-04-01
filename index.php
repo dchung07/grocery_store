@@ -143,9 +143,6 @@
 
                     }
 
-
-
-
                     
                     ?>
 
@@ -230,7 +227,7 @@
                             if(empty($_SESSION['cart'])){
                                 echo "<button type='button' disabled>Nothing to order</button>";
                             } else {
-                                echo '<form action="checkout.html" method="POST">';
+                                echo '<form action="checkout.php" method="POST">';
                                     $serialized_cart = serialize($_SESSION['cart']);
                                     echo '<input type="hidden" name="cart" value="' . htmlspecialchars($serialized_cart) . '">';
                                     echo "<button type='submit'>Place an order</button>";

@@ -77,3 +77,7 @@ A Grocery Store
     -> For convenience when removing an item from the cart, instantly create the modal
 
     -> Send session to the checkout page.
+
+    -> only allow quantity max to be up to the in_stock value of the item
+
+    -> Finish Aesthetic Layout of cart information in the checkout page.
