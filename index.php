@@ -213,8 +213,15 @@
 
                         </div>
                         <form class="remove-all-container" action = "index.php" method="POST">
-                            <button type="submit" name="remove_all">Remove All<img src="images/delete_black_24dp.svg" alt="Delete Icon"></button>
-                            
+                            <?php
+
+                            if($_SESSION['totalQuantity'] === 0){
+                                echo '<button type="submit" name="remove_all" disabled>Remove All<img src="images/delete_black_24dp.svg" alt="Delete Icon"></button>';
+                            } else {
+                                echo '<button type="submit" name="remove_all">Remove All<img src="images/delete_black_24dp.svg" alt="Delete Icon"></button>';
+                            }
+
+                            ?>
                         </form>
                     </div>
                 </div>
@@ -223,6 +230,7 @@
                     <h5>Order Summary</h5>
                     <div class="checkout-info">
                         <h5><?php echo'Total Price: $' . $_SESSION['totalPrice']; ?></h5>
+
                         <?php
                             if(empty($_SESSION['cart'])){
                                 echo "<button type='button' disabled>Nothing to order</button>";
@@ -234,6 +242,7 @@
                                 echo '</form>';
                             }
                         ?>
+
                     </div>              
                 </div>
         
