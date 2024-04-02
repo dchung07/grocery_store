@@ -88,3 +88,5 @@ A Grocery Store
     -> Make font Better
 
     -> Add images to file and adjust sql database schema to include image field
+
+    -> Style the remove btn (individual cart) + Quantity Increase/Decrease Buttons

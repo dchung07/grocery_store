@@ -188,7 +188,7 @@
                                                 echo '<input type="hidden" name="product_id" value="'. $product_id .'">';
                                                 echo '<input type="hidden" name="unit_price" value="' . $content['unit_price'] . '">';
                                                 echo '<input type="hidden" name="quantity" value="' . $content['quantity'] . '">';
-                                                echo '<input type="submit" name="deleteItem" value="x">';
+                                                echo '<input type="submit" name="deleteItem" class="deleteItem" value="">';
                                             echo '</form>';
 
                                         echo '</div>';

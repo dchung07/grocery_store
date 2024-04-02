@@ -298,7 +298,6 @@ span {
 .modal-content-content {
     border: 1px solid transparent;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
-    /* Remove left box-shadow */
 }
 
 .modal-content-card-container {
@@ -418,4 +417,18 @@ span {
 
 .card_submit_form > input[type="number"] {
     width: 100%;
+}
+
+.deleteItem {
+    background-image: url('images/delete_black_24dp.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+}
+
+.deleteItem:hover {
+    opacity: 0.7;
 }
