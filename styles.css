@@ -409,7 +409,7 @@ span {
     border-radius: 8px;
 }
 
-.remove-all-container > button:hover {
+.remove-all-container > .remove_all_enabled:hover {
     background: rgba(181, 182, 183, 0.5);
 }
 

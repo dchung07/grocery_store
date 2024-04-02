@@ -215,10 +215,10 @@
                         <form class="remove-all-container" action = "index.php" method="POST">
                             <?php
 
-                            if($_SESSION['totalQuantity'] === 0){
+                            if($_SESSION['cart'] === array()){
                                 echo '<button type="submit" name="remove_all" disabled>Remove All<img src="images/delete_black_24dp.svg" alt="Delete Icon"></button>';
                             } else {
-                                echo '<button type="submit" name="remove_all">Remove All<img src="images/delete_black_24dp.svg" alt="Delete Icon"></button>';
+                                echo '<button type="submit" class="remove_all_enabled" name="remove_all">Remove All<img src="images/delete_black_24dp.svg" alt="Delete Icon"></button>';
                             }
 
                             ?>
