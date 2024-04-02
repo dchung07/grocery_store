@@ -59,8 +59,10 @@ function checkForm() {
 
     if (firstName.value !== "" && lastName.value !== "" && email.value !== "" && phone.value !== "" && street.value !== "" && city.value !== "") {
         submitBtn.disabled = false; 
+        document.getElementById('submit').classList.add('submit_hover')
     } else {
         submitBtn.disabled = true; 
+        document.getElementById('submit').classList.remove('submit_hover');
     }
 }
 
