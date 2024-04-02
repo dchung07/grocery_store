@@ -307,7 +307,13 @@
                                 echo '<div class="card-container">';
                                 echo '<div class="card">';
                                 // echo '<img src="' . $row['image_url'] . '" alt="' . $row['name'] . '">';
-                                echo '<img src="images/food-croissant.svg" alt="">';
+                                $imagePath = "food_images/" . $row['product_id'] . ".jpg";
+                                if(file_exists($imagePath)) {
+                                    echo '<img src="' . $imagePath .'" alt="">';
+                                } else {
+                                    echo '<img src="" alt="">';
+                                }
+
                                 echo '<form class="card_submit_form" action="index.php" method="post">';
                                 echo '<h4>' . $row['unit_price'] . '/' . $row['unit_quantity'] . '</h4>';
                                 echo '<h5>' . $row['product_name'] . '</h5>';

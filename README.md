@@ -90,3 +90,24 @@ A Grocery Store
     -> Add images to file and adjust sql database schema to include image field
 
     -> Style the remove btn (individual cart) + Quantity Increase/Decrease Buttons
+
+    -> Design Choice
+    -> Increment/Decrement sql immediately as it is put in cart? or leave it to the checkout page?
+
+    Option 1 -> Increment/decrement immediately as added in cart
+    -> Send sql query. 
+    -> Would prevent others from selecting and further conflicts such as stock running out while on checkout page (more annoying for user)
+    -> if remove item -> send sql query
+    -> if remove all -> send sql query
+    -> on checkout, there would be no sql query sent
+
+    Option 2 -> sql query at checkout
+    -> May have conflicts if other user purchases while an user is on checkout (can be frustrating)
+    -> No sql query until checkout is made
+    -> Less sql queries, less intensive but... not as good?
+
+    
+    Also add images for each food item.
+    Check if image file exists, then if it exists, use that as the src, else, use generic croissant.
+    or maybe a generic placeholder image.
+    Use product_id's as the image path
