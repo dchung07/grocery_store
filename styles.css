@@ -359,18 +359,18 @@ span {
     border: 1px solid transparent;
 }
 
-.quantity-selector-container > form > input[type="button"] {
+.quantity-selector-container > input[type="button"] {
     padding: 0px 8px;
     border: none;
     background-color: rgb(236, 158, 14);
 }
 
-.quantity-selector-container > form > input[type="button"]:nth-child(2) {
+.quantity-selector-container > input[type="button"]:nth-child(1) {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }
 
-.quantity-selector-container > form > input[type="button"]:nth-child(4) {
+.quantity-selector-container > input[type="button"]:nth-child(3) {
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
 }
@@ -379,11 +379,11 @@ span {
     border: 1px solid rgb(91, 85, 85);
 }
 
-.quantity-selector-container > form > input[type="button"]:nth-child(2):hover {
+.quantity-selector-container > input[type="button"]:nth-child(1):hover {
     opacity: 0.8;
 }
 
-.quantity-selector-container > form > input[type="button"]:nth-child(4):hover {
+.quantity-selector-container > input[type="button"]:nth-child(3):hover {
     opacity: 0.8;
 }
 
@@ -391,6 +391,7 @@ span {
     display: flex;
     justify-content: flex-start;
     margin-left: 20px;
+    padding: 1rem;
 }
 
 .remove-all-container {

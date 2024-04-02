@@ -194,17 +194,19 @@
                                         echo '</div>';
 
                                         echo '<div class="modal-content-card-bot">';
-                                            echo '<div class="quantity-selector-container">';
+
 
                                                 echo '<form id="cartForm" action="index.php" method="POST">';
                                                     echo '<input type="hidden" name="product_id" value="' . $product_id . '">';
                                                     
-                                                    echo '<input type="button" onclick="decreaseQuantity()" value="-">';
-                                                    echo '<input type="text" id="cartQuantity" name="cartQuantity" value="' . $content['quantity'] . '" readonly>';
-                                                    echo '<input type="button" onclick="increaseQuantity()" value="+">';
+                                                    echo '<div class="quantity-selector-container">';
+                                                        echo '<input type="button" onclick="decreaseQuantity()" value="-">';
+                                                        echo '<input type="text" id="cartQuantity" name="cartQuantity" value="' . $content['quantity'] . '" readonly>';
+                                                        echo '<input type="button" onclick="increaseQuantity()" value="+">';
+                                                    echo '</div>';
 
                                                 echo '</form>';
-                                            echo '</div>';
+
                                             echo '<h4>' . $content['unit_price'] . '</h4>';
                                         echo '</div>';
                                     echo '</div>';
