@@ -127,10 +127,10 @@
                         $quantity = $_POST['quantity'];
                         $unit_price = $_POST['unit_price'];
 
-                        echo '<h1>'. $product_id .'</h1>';
-                        echo '<h1>'. $_SESSION['cart'][$product_id]['product_name'] .'</h1>';
-                        echo '<h1>'. $_SESSION['cart'][$product_id]['quantity'] .'</h1>';
-                        echo '<h1>'. $_SESSION['cart'][$product_id]['unit_price'] .'</h1>';
+                        // echo '<h1>'. $product_id .'</h1>';
+                        // echo '<h1>'. $_SESSION['cart'][$product_id]['product_name'] .'</h1>';
+                        // echo '<h1>'. $_SESSION['cart'][$product_id]['quantity'] .'</h1>';
+                        // echo '<h1>'. $_SESSION['cart'][$product_id]['unit_price'] .'</h1>';
 
                         $quantity = $_SESSION['cart'][$product_id]['quantity'];
                         $unit_price = $_SESSION['cart'][$product_id]['unit_price'];
@@ -143,6 +143,28 @@
                         header("Location: ".$_SERVER['REQUEST_URI']);
                         echo '</script>';
                         exit();
+                    }
+
+                    //Change quantity btn clicked 
+                    if(isset($_POST['change_quantity'])) {
+                        $product_id = $_POST['product_id'];
+                        $unit_price = $_POST['unit_price'];
+                        $new_quantity = $_POST['new_quantity'];
+
+                        $unit_price = $_SESSION['cart'][$product_id]['unit_price'];
+                        $original_quantity = $_SESSION['cart'][$product_id]['quantity'];
+                        $difference_quantity = $original_quantity - $new_quantity;
+                        //e.g. original = 3, new quantity = 2. Then difference is + 1. e.g. original = 1, new quantity = 2, then difference is -1.
+                        //So to make this work we will -= to the total quantity
+                        $_SESSION['totalQuantity'] -= $difference_quantity;
+
+                        $difference_price = $difference_quantity * $unit_price;
+                        //Logic for this
+                        $_SESSION['totalPrice'] -= $difference_price;
+
+                        $_SESSION['cart'][$product_id]['quantity'] = $new_quantity;
+
+
                     }
 
                     
@@ -207,13 +229,14 @@
 
                                                 echo '<form id="cartForm" action="index.php" method="POST">';
                                                     echo '<input type="hidden" name="product_id" value="' . $product_id . '">';
+                                                    echo '<input type="hidden" name="unit_price" value="' . $content['unit_price'] . '">';
                                                     
                                                     echo '<div class="quantity-selector-container">';
                                                         // echo '<input type="button" onclick="decreaseQuantity()" value="-">';
                                                         // echo '<input type="text" id="cartQuantity" name="cartQuantity" value="' . $content['quantity'] . '" readonly>';
                                                         // echo '<input type="button" onclick="increaseQuantity()" value="+">';
 
-                                                            echo '<input type="number" name="quantity" value="' . $content['quantity'] . '" min="1" max="'. $content['in_stock'] . '"><br>';
+                                                            echo '<input type="number" name="new_quantity" value="' . $content['quantity'] . '" min="1" max="'. $content['in_stock'] . '"><br>';
                                                             echo '<button class="changeQuantityBtn" type="submit" name="change_quantity">Change Quantity</button>';
 
                                                         //In_stock value is not found. Means we have not sent the in_stock value to the modal area. 
