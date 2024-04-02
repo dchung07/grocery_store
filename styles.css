@@ -416,3 +416,6 @@ span {
 /* .modal-content-card-container-container {
 } */
 
+.card_submit_form > input[type="number"] {
+    width: 100%;
+}

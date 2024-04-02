@@ -310,7 +310,7 @@
                                         echo 'Quantity: <input type="number" name="quantity" disabled><br>';
                                         echo '<button class="outOfStockBtn" type="button" disabled>Out of Stock</button>';
                                     } else {
-                                        echo 'Quantity: <input type="number" name="quantity" value="0" min="1"><br>';
+                                        echo 'Quantity: <input type="number" name="quantity" value="0" min="1" max="'. $row['in_stock'] . '"><br>';
                                         echo '<button class="addCartBtn" type="submit" name="add_to_cart">Add to Cart</button>';
                                     }
 
