@@ -111,3 +111,12 @@ A Grocery Store
     Check if image file exists, then if it exists, use that as the src, else, use generic croissant.
     or maybe a generic placeholder image.
     Use product_id's as the image path
+
+    -> quantity Increase/Decrease
+    -> if each time, the form is resubmitted
+    -> Just change it to a normal quantity form
+    -> Have the quantity changing above, and then a button below to submit the quantity change
+
+    -> when delete individual item, re-open modal immediately?
+
+    -> refactor the code to take into account $in_stock variable. Might have messed up not taking this into account earlier...

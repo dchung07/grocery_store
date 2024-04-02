@@ -88,6 +88,7 @@
                         $quantity = $_POST['quantity'];
                         $unit_price = $_POST['unit_price'];
                         $unit_quantity = $_POST['unit_quantity'];
+                        $in_stock = $_POST['in_stock'];
 
                         if(isset($_SESSION['cart'][$product_id])) {
                             $_SESSION['cart'][$product_id]['quantity'] += $quantity;
@@ -96,7 +97,8 @@
                                 "quantity" => $quantity,
                                 "product_name" => $product_name,
                                 "unit_price" => $unit_price,
-                                "unit_quantity" => $unit_quantity
+                                "unit_quantity" => $unit_quantity,
+                                "in_stock" => $in_stock
                             );
                         }
 
@@ -139,8 +141,8 @@
                         unset($_SESSION['cart'][$product_id]);
 
                         header("Location: ".$_SERVER['REQUEST_URI']);
+                        echo '</script>';
                         exit();
-
                     }
 
                     
@@ -180,7 +182,14 @@
                                     echo '<div class="modal-content-card">';
                                         echo '<div class="modal-content-card-top">';
                                             echo '<div class="modal-logo-name">';
-                                                echo '<img src="images/food-croissant.svg" alt="">';
+                                            
+                                                $imagePath = "food_images/" . $product_id . ".jpg";
+                                                if(file_exists($imagePath)) {
+                                                    echo '<img src="' . $imagePath .'" alt="">';
+                                                } else {
+                                                    echo '<img src="" alt="">';
+                                                }
+
                                                 echo '<h6>' . $content['product_name'] . '</h6>';
                                             echo '</div>';
 
@@ -200,9 +209,15 @@
                                                     echo '<input type="hidden" name="product_id" value="' . $product_id . '">';
                                                     
                                                     echo '<div class="quantity-selector-container">';
-                                                        echo '<input type="button" onclick="decreaseQuantity()" value="-">';
-                                                        echo '<input type="text" id="cartQuantity" name="cartQuantity" value="' . $content['quantity'] . '" readonly>';
-                                                        echo '<input type="button" onclick="increaseQuantity()" value="+">';
+                                                        // echo '<input type="button" onclick="decreaseQuantity()" value="-">';
+                                                        // echo '<input type="text" id="cartQuantity" name="cartQuantity" value="' . $content['quantity'] . '" readonly>';
+                                                        // echo '<input type="button" onclick="increaseQuantity()" value="+">';
+
+                                                            echo '<input type="number" name="quantity" value="' . $content['quantity'] . '" min="1" max="'. $content['in_stock'] . '"><br>';
+                                                            echo '<button class="changeQuantityBtn" type="submit" name="change_quantity">Change Quantity</button>';
+
+                                                        //In_stock value is not found. Means we have not sent the in_stock value to the modal area. 
+
                                                     echo '</div>';
 
                                                 echo '</form>';
@@ -321,6 +336,7 @@
                                 echo '<input type="hidden" name="product_name" value="' . $row['product_name'] . '">';
                                 echo '<input type="hidden" name="unit_price" value="' . $row['unit_price'] . '">';
                                 echo '<input type="hidden" name="unit_quantity" value="' . $row['unit_quantity'] . '">';
+                                echo '<input type="hidden" name="in_stock" value="' . $row['in_stock'] . '">';
                                 
                                 
                                     if($row['in_stock'] == 0) {

@@ -314,11 +314,14 @@ span {
 }
 
 .modal-logo-name {
-    width: 40px;
-    height: 40px;
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+.modal-logo-name > img {
+    width: 40px;
+    height: 40px;
 }
 
 .modal-content-card {
@@ -353,7 +356,7 @@ span {
     padding: 0px 1rem 1rem 1rem;
 }
 
-.quantity-selector-container > input[type="text"]{
+/* .quantity-selector-container > input[type="text"]{
     width: 60px;
     text-align: center;
     border: 1px solid transparent;
@@ -385,13 +388,31 @@ span {
 
 .quantity-selector-container > input[type="button"]:nth-child(3):hover {
     opacity: 0.8;
-}
+} */
 
 .quantity-selector-container {
     display: flex;
-    justify-content: flex-start;
-    margin-left: 20px;
-    padding: 1rem;
+    margin-top: 1rem;
+    width: 150%;
+}
+
+.quantity-selector-container > input[type="number"] {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    text-align: center;
+    width: 20%;
+    border: 1px solid transparent;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
+    padding: 2px 20px;
+}
+
+.quantity-selector-container > button[type="submit"] {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid transparent;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
+    padding: 2px 60px;
 }
 
 .remove-all-container {
