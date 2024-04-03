@@ -85,7 +85,7 @@
 
                     $_SESSION['confirmation_details'] = $cart;
                     
-                    $_SESSION['form_submitted'] = true;
+                    $_SESSION['form_submitted'] = true; 
                     // $_SESSION['cart'] = array();
                     // $_SESSION['totalQuantity'] = 0;
                     // $_SESSION['totalPrice'] = 0.00;
@@ -110,6 +110,63 @@
                 // }
 
                 
+            ?>
+
+            <?php
+
+            if($_SESSION['form_submitted'] === true) {
+
+                //If form is submitted.
+
+                $cart = $_SESSION['cart'];
+                if (!empty($cart) && is_array($cart)) {
+
+                    $left_arrow_image_src = "images/chevron_left_black_24dp.svg";
+                    $logo_image_src = "images/food-croissant.svg";
+                    
+                    echo '<div class="order_details">';
+
+                        echo '<div class="header">';
+                            echo '<div class="left-side">';
+                                echo '<img src="' . $left_arrow_image_src . '" alt="Left Arrow">';
+                                echo '<h3>Continue Shopping</h3>';
+                            echo '</div>';
+                            echo '<div class="logo-container">';
+                                echo '<div class="logo">';
+                                    echo '<h3>Foodies</h3>';
+                                    echo '<img src="' . $logo_image_src . '" alt="logo">';
+                                echo '</div>';
+                            echo '</div>';
+                        echo '</div>';
+
+                        echo '<div class="order_content">';
+
+                            echo "<h2 class='cart-content'>Cart Contents:</h2>";
+                            echo "<ul class='checkout-ul'>";
+                            foreach ($cart as $product_id => $item) {
+                                echo "<li>{$item['product_name']} - Quantity: {$item['quantity']}, Unit Price: {$item['unit_price']}, Unit Quantity: {$item['unit_quantity']}</li>";
+                            }
+                            echo "</ul>";
+                            echo "<h2>Total Price: $" . $_SESSION['totalPrice'] . "</h2>";
+                            echo "<h3>Order details have been emailed to " . $email . "</h3>";
+                            echo "<h3>Thank you " . $first_name . " " . $last_name. "</h3>";
+                            echo "<h3>Order is being sent to address: " . $street . ", " . $city . ", " . $state . "</h3>";
+                        
+                        echo '</div>';
+
+                    echo '</div>';
+
+                }
+
+                $_SESSION['cart'] = array();
+                $_SESSION['totalQuantity'] = 0;
+                $_SESSION['totalPrice'] = 0.00;
+                $_SESSION['form_submitted'] = false;
+
+            } else {
+
+            }
+
             ?>
 
     <div class="container">
@@ -179,40 +236,6 @@
                 <input id="submit" type="submit" name="submit" value="Confirm Order" disabled>
 
             </form>
-
-            <?php
-
-                if($_SESSION['form_submitted'] === true) {
-
-                    //If form is submitted.
-
-                    echo "<h1>form has been submitted</h1>";
-
-                    $cart = $_SESSION['cart'];
-                    if (!empty($cart) && is_array($cart)) {
-                        echo "<h2 class='cart-content'>Cart Contents:</h2>";
-                        echo "<ul class='checkout-ul'>";
-                        foreach ($cart as $product_id => $item) {
-                            echo "<li>{$item['product_name']} - Quantity: {$item['quantity']}, Unit Price: {$item['unit_price']}, Unit Quantity: {$item['unit_quantity']}</li>";
-                        }
-                        echo "</ul>";
-                        echo "<h2>Total Price: $" . $_SESSION['totalPrice'] . "</h2>";
-                        echo "<h3>Order details have been emailed to " . $email . "</h3>";
-                        echo "<h3>Thank you " . $first_name . " " . $last_name. "</h3>";
-                        echo "<h3>Order is being sent to address: " . $street . ", " . $city . ", " . $state . "</h3>";
-                    } else {
-                        echo "<p>Cart is empty.</p>";
-                    }
-
-                    $_SESSION['cart'] = array();
-                    $_SESSION['totalQuantity'] = 0;
-                    $_SESSION['totalPrice'] = 0.00;
-
-                } else {
-
-                }
-
-            ?>
 
         </div>
     </div>

@@ -141,7 +141,6 @@
                         unset($_SESSION['cart'][$product_id]);
 
                         header("Location: ".$_SERVER['REQUEST_URI']);
-
                         exit();
                     }
 
