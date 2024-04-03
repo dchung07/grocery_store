@@ -120,3 +120,18 @@ A Grocery Store
     -> when delete individual item, re-open modal immediately?
 
     -> refactor the code to take into account $in_stock variable. Might have messed up not taking this into account earlier...
+
+    Option 1 -> Increment/decrement immediately as added in cart
+    -> Send sql query. 
+    -> Would prevent others from selecting and further conflicts such as stock running out while on checkout page (more annoying for user)
+    -> if remove item -> send sql query
+    -> if remove all -> send sql query
+    -> on checkout, there would be no sql query sent
+
+    -> category Expansion to see sub-categories
+
+    -> Add to cart -> sql, in_stock - quantity
+    -> remove from cart -> sql, in_stock + quantity
+    -> remove all from cart -> sql, loop through entire cart in sql, and add all the quantities of each item back to in_stock field
+
+    -> or an easier method

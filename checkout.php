@@ -77,6 +77,55 @@
             </form>
 
             <?php
+                session_start();
+
+                // on click of the submit btn, we wil check once more, that the contents of the cart exists. We will get its quantity, and send
+                // an sql query where we subtract the quantity from the in_Stock field of each product_id. 
+                // After the sql query is executed, an email will be sent (fake email) 
+                // & then the cart session will be emptied. The session variables for the total price, and quantity will also be emptied. 
+                // Perhaps have a popup modal where the email details confirmation of the order are sent
+                // The email details confirmation would include all the product_names, quantity, and the total price of the transaction. Also date the transaction was made.
+                // Perhaps even have some details such as "Hello {name}, your order {order_details} have been delivered to {address}.
+
+
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] == "place_order") {
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $dbname = "grocery";
+    
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+    
+                    $sql = "SELECT * FROM products";
+    
+                    $result = $conn->query($sql);
+                    $cart = $_SESSION['cart'];
+
+
+                    //Check if cart is not empty (See if users cart is actually filled for some reason e.g. user loaded checkout page directly bypassing index)
+                    if(!empty($cart) && is_array($cart)) {
+                        foreach($cart as $product_id => $item) {
+                            //Will loop through each item in the cart.
+                            $quantity = $item['quantity'];
+    
+                            $update_sql = "UPDATE products SET in_stock = in_stock - $quantity WHERE product_id = $product_id";
+                            $conn->query($update_sql);
+
+                        }
+                    }
+                    $conn->close(); 
+
+                    $_SESSION['cart'] = array();
+                    $_SESSION['totalQuantity'] = 0;
+                    $_SESSION['totalPrice'] = 0.00;
+
+                    // header("Location: ".$_SERVER['REQUEST_URI']);
+                    // exit();
+
+                }
+
+
+
                 // $cart = unserialize($_POST['cart']);
                 // if (!empty($cart) && is_array($cart)) {
                 //     echo "<h2 class='cart-content'>Cart Contents:</h2>";
@@ -88,6 +137,8 @@
                 // } else {
                 //     echo "<p>Cart is empty or invalid.</p>";
                 // }
+
+                
             ?>
 
         </div>

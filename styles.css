@@ -132,6 +132,14 @@
     font-size: 1.5rem;
 }
 
+/* .sub-category {
+    display: none;
+}
+
+#category:hover .sub-category {
+    display: block;
+} */
+
 .header_middle {
     display: flex;
     gap: 1rem;

@@ -11,7 +11,7 @@
 
     <?php
         session_start();
-            $servername = "localhost";
+                $servername = "localhost";
                 $username = "root";
                 $password = "";
                 $dbname = "grocery";
@@ -141,7 +141,7 @@
                         unset($_SESSION['cart'][$product_id]);
 
                         header("Location: ".$_SERVER['REQUEST_URI']);
-                        echo '</script>';
+
                         exit();
                     }
 
@@ -276,8 +276,11 @@
                                 echo "<button type='button' disabled>Nothing to order</button>";
                             } else {
                                 echo '<form action="checkout.php" method="POST">';
-                                    $serialized_cart = serialize($_SESSION['cart']);
-                                    echo '<input type="hidden" name="cart" value="' . htmlspecialchars($serialized_cart) . '">';
+                                    // $serialized_cart = serialize($_SESSION['cart']);
+                                    // echo '<input type="hidden" name="cart" value="' . htmlspecialchars($serialized_cart) . '">';
+                                    // echo "<button type='submit'>Place an order</button>";
+
+                                    echo '<input type="hidden" name="action" value="place_order">';
                                     echo "<button type='submit'>Place an order</button>";
                                 echo '</form>';
                             }
@@ -301,11 +304,30 @@
             <div class="header_middle">
                 <form class="categoryForm" method="POST" onchange="submitForm()">
                     <select class="categoryDropdown" name="categoryDropdown" id="category">
-                    <option value="Category" <?php if($selected_category == 'Category') echo 'selected'; ?>>Category</option>
-                    <option value="Fruit" <?php if($selected_category == 'Fruit') echo 'selected'; ?>>Fruit</option>
-                    <option value="Drinks" <?php if($selected_category == 'Drinks') echo 'selected'; ?>>Drinks</option>
-                    <option value="Meat" <?php if($selected_category == 'Meat') echo 'selected'; ?>>Meat</option>
+                        <option value="Category" <?php if($selected_category == 'Category') echo 'selected'; ?>>Category</option>
+                        <option value="Fruit" <?php if($selected_category == 'Fruit') echo 'selected'; ?>>Fruit</option>
+                        <option value="Drinks" <?php if($selected_category == 'Drinks') echo 'selected'; ?>>Drinks</option>
+                        <option value="Meat" <?php if($selected_category == 'Meat') echo 'selected'; ?>>Meat</option>
                     </select>
+
+                    <!-- <optgroup class="sub-category" label="Fruit">
+                        <option value="Apple">Apple</option>
+                        <option value="Grape">Grape</option>
+                    </optgroup>
+
+                    <optgroup class="sub-category" label="Drinks">
+                        <option value="Water">Water</option>
+                        <option value="Juices">Juices</option>
+                        <option value="Sodas">Sodas</option>
+                        <option value="Teas">Teas</option>
+                        <option value="Energy">Energy</option>
+                    </optgroup>
+
+                    <optgroup class="sub-category" label="Meat">
+                        <option value="Beef">Beef</option>
+                        <option value="Lamb">Lamb</option>
+                        <option value="Pork">Pork</option>
+                    </optgroup> -->
                 </form>
     
                 <form class="searchbar" action="index.php" method="POST">
