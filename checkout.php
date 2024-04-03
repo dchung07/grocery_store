@@ -8,6 +8,110 @@
     <script src="checkout.js" defer></script>
 </head>
 <body>
+
+<?php
+                session_start();
+
+                $_SESSION['confirmation_details'] = array();
+                $_SESSION['user_details'] = array();
+                $_SESSION['form_submitted'] = false;
+
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $dbname = "grocery";
+    
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+    
+                    $sql = "SELECT * FROM products";
+    
+                    $result = $conn->query($sql);
+                    $cart = $_SESSION['cart'];
+
+
+                    //Check if cart is not empty (See if users cart is actually filled for some reason e.g. user loaded checkout page directly bypassing index)
+                    if(!empty($cart) && is_array($cart)) {
+                        foreach($cart as $product_id => $item) {
+                            //Will loop through each item in the cart.
+                            $quantity = $item['quantity'];
+    
+                            $update_sql = "UPDATE products SET in_stock = in_stock - $quantity WHERE product_id = $product_id";
+                            $conn->query($update_sql);
+
+                        }
+                    }
+                    $conn->close(); 
+
+                    if(isset($_SESSION['confirmation_details']) && isset($_SESSION['user_details'])) {
+                        unset($_SESSION['confirmation_details']);
+                        unset($_SESSION['user_details']);
+                    } else {
+                        $_SESSION['confirmation_details'] = array();
+                        $_SESSION['user_details'] = array();
+                    }
+
+                    if(isset($_POST['first_name'])) {
+                        $first_name = $_POST['first_name'];
+                    }
+                    if(isset($_POST['last_name'])) {
+                        $last_name = $_POST['last_name'];
+                    }
+                    if(isset($_POST['street'])) {
+                        $street = $_POST['street'];
+                    }
+                    if(isset($_POST['city'])) {
+                        $city = $_POST['city'];
+                    }
+                    if(isset($_POST['state'])) {
+                        $state = $_POST['state'];
+                    }
+                    if(isset($_POST['phone'])) {
+                        $phone = $_POST['phone'];
+                    }
+                    if(isset($_POST['email'])) {
+                        $email = $_POST['email'];
+                    }
+
+                    $_SESSION['user_details'] = array(
+                        "first_name" => $first_name,
+                        "last_name" => $last_name,
+                        "street" => $street,
+                        "city" => $city,
+                        "state" => $state,
+                        "phone" => $phone,
+                        "email" => $email
+                    );
+
+                    $_SESSION['confirmation_details'] = $cart;
+                    
+                    $_SESSION['form_submitted'] = true;
+                    // $_SESSION['cart'] = array();
+                    // $_SESSION['totalQuantity'] = 0;
+                    // $_SESSION['totalPrice'] = 0.00;
+
+                    // header("Location: ".$_SERVER['REQUEST_URI']);
+                    // exit();
+
+                }
+
+
+
+                // $cart = unserialize($_POST['cart']);
+                // if (!empty($cart) && is_array($cart)) {
+                //     echo "<h2 class='cart-content'>Cart Contents:</h2>";
+                //     echo "<ul class='checkout-ul'>";
+                //     foreach ($cart as $product_id => $item) {
+                //         echo "<li>{$item['product_name']} - Quantity: {$item['quantity']}, Unit Price: {$item['unit_price']}, Unit Quantity: {$item['unit_quantity']}</li>";
+                //     }
+                //     echo "</ul>";
+                // } else {
+                //     echo "<p>Cart is empty or invalid.</p>";
+                // }
+
+                
+            ?>
+
     <div class="container">
         <div class="header">
             <div class="left-side">
@@ -77,68 +181,37 @@
             </form>
 
             <?php
-                session_start();
 
-                // on click of the submit btn, we wil check once more, that the contents of the cart exists. We will get its quantity, and send
-                // an sql query where we subtract the quantity from the in_Stock field of each product_id. 
-                // After the sql query is executed, an email will be sent (fake email) 
-                // & then the cart session will be emptied. The session variables for the total price, and quantity will also be emptied. 
-                // Perhaps have a popup modal where the email details confirmation of the order are sent
-                // The email details confirmation would include all the product_names, quantity, and the total price of the transaction. Also date the transaction was made.
-                // Perhaps even have some details such as "Hello {name}, your order {order_details} have been delivered to {address}.
+                if($_SESSION['form_submitted'] === true) {
 
+                    //If form is submitted.
 
-                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] == "place_order") {
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $dbname = "grocery";
-    
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-    
-                    $sql = "SELECT * FROM products";
-    
-                    $result = $conn->query($sql);
+                    echo "<h1>form has been submitted</h1>";
+
                     $cart = $_SESSION['cart'];
-
-
-                    //Check if cart is not empty (See if users cart is actually filled for some reason e.g. user loaded checkout page directly bypassing index)
-                    if(!empty($cart) && is_array($cart)) {
-                        foreach($cart as $product_id => $item) {
-                            //Will loop through each item in the cart.
-                            $quantity = $item['quantity'];
-    
-                            $update_sql = "UPDATE products SET in_stock = in_stock - $quantity WHERE product_id = $product_id";
-                            $conn->query($update_sql);
-
+                    if (!empty($cart) && is_array($cart)) {
+                        echo "<h2 class='cart-content'>Cart Contents:</h2>";
+                        echo "<ul class='checkout-ul'>";
+                        foreach ($cart as $product_id => $item) {
+                            echo "<li>{$item['product_name']} - Quantity: {$item['quantity']}, Unit Price: {$item['unit_price']}, Unit Quantity: {$item['unit_quantity']}</li>";
                         }
+                        echo "</ul>";
+                        echo "<h2>Total Price: $" . $_SESSION['totalPrice'] . "</h2>";
+                        echo "<h3>Order details have been emailed to " . $email . "</h3>";
+                        echo "<h3>Thank you " . $first_name . " " . $last_name. "</h3>";
+                        echo "<h3>Order is being sent to address: " . $street . ", " . $city . ", " . $state . "</h3>";
+                    } else {
+                        echo "<p>Cart is empty.</p>";
                     }
-                    $conn->close(); 
 
                     $_SESSION['cart'] = array();
                     $_SESSION['totalQuantity'] = 0;
                     $_SESSION['totalPrice'] = 0.00;
 
-                    // header("Location: ".$_SERVER['REQUEST_URI']);
-                    // exit();
+                } else {
 
                 }
 
-
-
-                // $cart = unserialize($_POST['cart']);
-                // if (!empty($cart) && is_array($cart)) {
-                //     echo "<h2 class='cart-content'>Cart Contents:</h2>";
-                //     echo "<ul class='checkout-ul'>";
-                //     foreach ($cart as $product_id => $item) {
-                //         echo "<li>{$item['product_name']} - Quantity: {$item['quantity']}, Unit Price: {$item['unit_price']}, Unit Quantity: {$item['unit_quantity']}</li>";
-                //     }
-                //     echo "</ul>";
-                // } else {
-                //     echo "<p>Cart is empty or invalid.</p>";
-                // }
-
-                
             ?>
 
         </div>

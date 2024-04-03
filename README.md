@@ -135,3 +135,11 @@ A Grocery Store
     -> remove all from cart -> sql, loop through entire cart in sql, and add all the quantities of each item back to in_stock field
 
     -> or an easier method
+
+    -> new plan for email confirmation -> just send through the data to a new page and confirm the email there.
+    -> Send session data with all the necessary information
+    -> OR just add all the necessary data to a session variable, and then when the page reloads, if the session variable has data in it, open up a modal
+    -> and display all the email information
+
+    -> New idea
+    -> On click of submit instead of doing the sql query right away. 
