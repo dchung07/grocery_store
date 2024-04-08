@@ -20,6 +20,13 @@
 
                 $sql = "SELECT * FROM products";
 
+                function sanitize($input) {
+                    $input = trim($input);
+                    $input = stripslashes($input);
+                    $input = htmlspecialchars($input);
+                    return $input;
+                }
+
                  //If select category option
                 if (isset($_POST['categoryDropdown']) && !empty($_POST['categoryDropdown'])) {
                      $category = $_POST['categoryDropdown'];
@@ -37,7 +44,7 @@
                  } elseif(isset($_POST['searchSubmit']) && !empty($_POST['search'])) {
                      //If click on search, set variable to search value
                      //Set session variable (search) to search value
-                     $search = $_POST['search'];
+                     $search = sanitize($_POST['search']);
                      $_SESSION['search'] = $search; 
                      //Had to unset the session for category since it was messing with the
                      //Search session results as it had lower precedence in the conditional chain
@@ -301,33 +308,6 @@
             </div>
 
             <div class="header_middle">
-                <form class="categoryForm" method="POST" onchange="submitForm()">
-                    <select class="categoryDropdown" name="categoryDropdown" id="category">
-                        <option value="Category" <?php if($selected_category == 'Category') echo 'selected'; ?>>Category</option>
-                        <option value="Fruit" <?php if($selected_category == 'Fruit') echo 'selected'; ?>>Fruit</option>
-                        <option value="Drinks" <?php if($selected_category == 'Drinks') echo 'selected'; ?>>Drinks</option>
-                        <option value="Meat" <?php if($selected_category == 'Meat') echo 'selected'; ?>>Meat</option>
-                    </select>
-
-                    <!-- <optgroup class="sub-category" label="Fruit">
-                        <option value="Apple">Apple</option>
-                        <option value="Grape">Grape</option>
-                    </optgroup>
-
-                    <optgroup class="sub-category" label="Drinks">
-                        <option value="Water">Water</option>
-                        <option value="Juices">Juices</option>
-                        <option value="Sodas">Sodas</option>
-                        <option value="Teas">Teas</option>
-                        <option value="Energy">Energy</option>
-                    </optgroup>
-
-                    <optgroup class="sub-category" label="Meat">
-                        <option value="Beef">Beef</option>
-                        <option value="Lamb">Lamb</option>
-                        <option value="Pork">Pork</option>
-                    </optgroup> -->
-                </form>
     
                 <form class="searchbar" action="index.php" method="POST">
                     <input type="search" placeholder = "Search Products..." name="search"/>
@@ -346,7 +326,21 @@
         </div>
 
         <div class="content">   
-            <div class="card-container">
+
+            <div class="category-sidebar">
+
+                <form class="categoryForm" method="POST" onchange="submitForm()">
+                    <select class="categoryDropdown" name="categoryDropdown" id="category">
+                        <option value="Category" <?php if($selected_category == 'Category') echo 'selected'; ?>>Category</option>
+                        <option value="Fruit" <?php if($selected_category == 'Fruit') echo 'selected'; ?>>Fruit</option>
+                        <option value="Drinks" <?php if($selected_category == 'Drinks') echo 'selected'; ?>>Drinks</option>
+                        <option value="Meat" <?php if($selected_category == 'Meat') echo 'selected'; ?>>Meat</option>
+                    </select>
+                </form>
+
+            </div>
+
+
 
                 <!-- <div class="card">
                     <img src="images/food-croissant.svg" alt="">
@@ -370,39 +364,39 @@
                                 if(file_exists($imagePath)) {
                                     echo '<img src="' . $imagePath .'" alt="">';
                                 } else {
-                                    echo '<img src="" alt="">';
+                                echo '<img src="" alt="">';
+                            }
+
+                            echo '<form class="card_submit_form" action="index.php" method="post">';
+                            echo '<h4>' . $row['unit_price'] . '/' . $row['unit_quantity'] . '</h4>';
+                            echo '<h5>' . $row['product_name'] . '</h5>';
+                            echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
+                            echo '<input type="hidden" name="product_name" value="' . $row['product_name'] . '">';
+                            echo '<input type="hidden" name="unit_price" value="' . $row['unit_price'] . '">';
+                            echo '<input type="hidden" name="unit_quantity" value="' . $row['unit_quantity'] . '">';
+                            echo '<input type="hidden" name="in_stock" value="' . $row['in_stock'] . '">';
+                            
+                            
+                                if($row['in_stock'] == 0) {
+                                    echo 'Quantity: <input type="number" name="quantity" disabled><br>';
+                                    echo '<button class="outOfStockBtn" type="button" disabled>Out of Stock</button>';
+                                } else {
+                                    echo 'Quantity: <input type="number" name="quantity" value="0" min="1" max="'. $row['in_stock'] . '"><br>';
+                                    echo '<button class="addCartBtn" type="submit" name="add_to_cart">Add to Cart</button>';
                                 }
 
-                                echo '<form class="card_submit_form" action="index.php" method="post">';
-                                echo '<h4>' . $row['unit_price'] . '/' . $row['unit_quantity'] . '</h4>';
-                                echo '<h5>' . $row['product_name'] . '</h5>';
-                                echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
-                                echo '<input type="hidden" name="product_name" value="' . $row['product_name'] . '">';
-                                echo '<input type="hidden" name="unit_price" value="' . $row['unit_price'] . '">';
-                                echo '<input type="hidden" name="unit_quantity" value="' . $row['unit_quantity'] . '">';
-                                echo '<input type="hidden" name="in_stock" value="' . $row['in_stock'] . '">';
-                                
-                                
-                                    if($row['in_stock'] == 0) {
-                                        echo 'Quantity: <input type="number" name="quantity" disabled><br>';
-                                        echo '<button class="outOfStockBtn" type="button" disabled>Out of Stock</button>';
-                                    } else {
-                                        echo 'Quantity: <input type="number" name="quantity" value="0" min="1" max="'. $row['in_stock'] . '"><br>';
-                                        echo '<button class="addCartBtn" type="submit" name="add_to_cart">Add to Cart</button>';
-                                    }
-
-                                echo '</form>';
-                                echo '</div>';
-                                echo '</div>';
-                                echo '</div>';
-                            }
-                        } else {
-                            echo "0 results";
+                            echo '</form>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
                         }
-                        $conn->close();
-                    ?> 
+                    } else {
+                        echo "0 results";
+                    }
+                    $conn->close();
+                ?> 
+                </div>
 
-            </div>
         </div>
     </div>
     

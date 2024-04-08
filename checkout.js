@@ -7,41 +7,56 @@ backToHome.addEventListener('click', function() {
 //Form Validation Client Side
 
 //First-Last Name Input Box Validation
-// const first_name = document.querySelector('.first_name');
-// const last_name = document.querySelector('.last_name');
-// const phone = document.querySelector('.phone');
-// const email = document.querySelector('.email');
-// const street = document.querySelector('.street');
-// const city = document.querySelector('.city');
-// const submit = document.getElementById('submit');
+const first_name = document.querySelector('.first_name');
+const last_name = document.querySelector('.last_name');
+const phone = document.querySelector('.phone');
+const email = document.querySelector('.email');
+const street = document.querySelector('.street');
+const city = document.querySelector('.city');
+const submit = document.getElementById('submit');
 
 
-// const letterOnlyRegex = /^[A-Za-z]+$/;
-// const integerOnlyRegex = /^[0-9]+$/;
+const letterOnlyRegex = /^[A-Za-z]+$/;
+const integerOnlyRegex = /^[0-9]+$/;
 
-// function lettersOnlyInput(input) {
-//     input.addEventListener('input', function() {
-//         if(!letterOnlyRegex.test(input.value)) {
-//             input.style.borderColor = "red";
-//         } else {
-//             input.style.borderColor = "grey";
-//         }
-//     });
-// }
+function lettersOnlyInput(input) {
+    input.addEventListener('input', function() {
+        if(!letterOnlyRegex.test(input.value)) {
+            input.style.borderColor = "red";
+        } else {
+            input.style.borderColor = "grey";
+        }
+    });
+}
 
-// function integerOnlyInput(input) {
-//     input.addEventListener('input', function() {
-//         if(!integerOnlyRegex.test(input.value)) {
-//             input.style.borderColor = "red";
-//         } else {
-//             input.style.borderColor = "grey";
-//         }
-//     });
-// }
+function integerOnlyInput(input) {
+    input.addEventListener('input', function() {
+        if(!integerOnlyRegex.test(input.value)) {
+            input.style.borderColor = "red";
+        } else {
+            input.style.borderColor = "grey";
+        }
+    });
+}
 
-// lettersOnlyInput(first_name);
-// lettersOnlyInput(last_name);
-// integerOnlyInput(phone);
+function notEmpty(input) {
+    input.addEventListener('input', function() {
+        if(input.value === "") {
+            input.style.borderColor = "red";
+        } else {
+            input.style.borderColor = "grey";
+        }
+    })
+}
+
+lettersOnlyInput(first_name);
+lettersOnlyInput(last_name);
+integerOnlyInput(phone);
+notEmpty(street);
+notEmpty(city);
+notEmpty(email);
+notEmpty(phone);
+
 
 
 //For the submit  button

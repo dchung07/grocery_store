@@ -43,6 +43,13 @@
                     }
                     $conn->close(); 
 
+                    function sanitize($input) {
+                        $input = trim($input);
+                        $input = stripslashes($input);
+                        $input = htmlspecialchars($input);
+                        return $input;
+                    }
+
                     if(isset($_SESSION['confirmation_details']) && isset($_SESSION['user_details'])) {
                         unset($_SESSION['confirmation_details']);
                         unset($_SESSION['user_details']);
@@ -52,25 +59,25 @@
                     }
 
                     if(isset($_POST['first_name'])) {
-                        $first_name = $_POST['first_name'];
+                        $first_name = sanitize($_POST['first_name']);
                     }
                     if(isset($_POST['last_name'])) {
-                        $last_name = $_POST['last_name'];
+                        $last_name = sanitize($_POST['last_name']);
                     }
                     if(isset($_POST['street'])) {
-                        $street = $_POST['street'];
+                        $street = sanitize($_POST['street']);
                     }
                     if(isset($_POST['city'])) {
-                        $city = $_POST['city'];
+                        $city = sanitize($_POST['city']);
                     }
                     if(isset($_POST['state'])) {
-                        $state = $_POST['state'];
+                        $state = sanitize($_POST['state']);
                     }
                     if(isset($_POST['phone'])) {
-                        $phone = $_POST['phone'];
+                        $phone = sanitize($_POST['phone']);
                     }
                     if(isset($_POST['email'])) {
-                        $email = $_POST['email'];
+                        $email = sanitize($_POST['email']);
                     }
 
                     $_SESSION['user_details'] = array(
