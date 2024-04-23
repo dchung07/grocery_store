@@ -36,25 +36,33 @@ window.addEventListener('click', function(event) {
     }
 });
 
-//Category Selection
-
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     var categoryDropdown = document.getElementById('category');
-
-//     categoryDropdown.addEventListener('change', function() {
-//         var selectedCategory = categoryDropdown.value;
-//         window.location.href = 'index.php?categoryDropdown=' + encodeURIComponent(selectedCategory);
-//     });
-// });
-
 
 
 function submitForm() {
 
-    let form = document.querySelector('.categoryForm');
+    let form = document.getElementById('category');
     form.submit();
 }
 
-//AJAX cart quantity change
+function submitAllForm() {
+    let allForm = document.getElementById('allCategory');
+    allForm.submit();
+}
+
+function submitFruitForm() {
+    let fruitForm = document.getElementById('fruitCategory');
+    fruitForm.submit();
+}
+
+function submitMeatForm() {
+    let meatForm = document.getElementById('meatCategory');
+    meatForm.submit();
+}
+
+function submitDrinkForm() {
+    let drinkForm = document.getElementById('drinkCategory');
+    drinkForm.submit();
+}
+
+//AJAX cart quantity change /
 

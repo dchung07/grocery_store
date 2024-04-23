@@ -6,7 +6,7 @@
 }
 
 .container {
-    background-color: rgb(225, 228, 232);
+    /*background-color: rgb(225, 228, 232);*/
     height: 100vh;
 }
 
@@ -116,17 +116,17 @@
     border-radius: 50%;
 }
 
-.categoryDropdown {
-    border-radius: 8px;
-    padding: 0px 6px;
-    border: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 1px;
-}
+/*.categoryDropdown {*/
+/*    border-radius: 8px;*/
+/*    padding: 0px 6px;*/
+/*    border: 1px solid transparent;*/
+/*    border-bottom: 1px solid transparent;*/
+/*    box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 1px;*/
+/*}*/
 
-.categoryDropdown:hover {
-    border: 1px black solid;
-}
+/*.categoryDropdown:hover {*/
+/*    border: 1px black solid;*/
+/*}*/
 
 .categoryForm > select, .searchbar > input[type="submit"]{
     font-size: 1.5rem;
@@ -147,33 +147,25 @@
 
 .content {
     padding: 1rem;
-    display: grid;
-    grid-template-columns: 1fr 9fr;
-}
-
-.category-sidebar {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    padding: 16px;
 }
 
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
     gap: 1rem;
-
+    justify-content: center;
 }
 
 .card {
     border: 1px solid transparent;
     border-radius: 16px;
     padding: 1rem;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    max-width: 500px;
 }
 
 .card > h4 {
@@ -378,6 +370,12 @@ span {
     padding: 0px 1rem 1rem 1rem;
 }
 
+.modal-content-card-bot > h4 {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
 /* .quantity-selector-container > input[type="text"]{
     width: 60px;
     text-align: center;
@@ -415,7 +413,7 @@ span {
 .quantity-selector-container {
     display: flex;
     margin-top: 1rem;
-    width: 150%;
+    width: 100%;
 }
 
 .quantity-selector-container > input[type="number"] {
@@ -465,6 +463,7 @@ span {
 
 .deleteItem {
     background-image: url('images/delete_black_24dp.svg');
+    background-color: white;
     background-size: contain;
     background-repeat: no-repeat;
     width: 30px;
@@ -475,4 +474,50 @@ span {
 
 .deleteItem:hover {
     opacity: 0.7;
+}
+
+.category-bar {
+    display: flex;
+    background-color: orange;
+    
+}
+
+.categoryForm {
+    background-color: white;
+    border: none;
+        box-sizing: border-box;
+        color: white;
+}
+
+.categoryDropdown {
+    box-sizing: border-box;
+    background-color: orange;
+    border: none;
+    padding: 8px 3rem;
+    color: white;
+    font-weight: bold;
+}
+
+.categoryDropdown:hover {
+    background-color: black;
+    color: white;
+}
+
+.categoryDropdown option {
+    background-color: white;
+    color: black;
+}
+
+
+.categoryDropdown option:first-child{
+	display: none;
+}
+
+.categoryDropdown option:nth-child(2) {
+    font-weight: bold;
+}
+
+.categoryForm > input[type="submit"] {
+    appearance: none;
+    font-size: 24.8px;
 }
