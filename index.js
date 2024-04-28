@@ -10,6 +10,11 @@ let categoryDropdown = document.querySelector('.categoryDropdown');
 
 let backdrop;
 
+function resetPage() {
+    let logoForm = document.getElementById('logoReset');
+    logoForm.submit();
+}
+
 //Category 
 
 shopping.addEventListener('click', function() {

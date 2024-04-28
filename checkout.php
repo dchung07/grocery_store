@@ -21,6 +21,7 @@
                     $username = "root";
                     $password = "";
                     $dbname = "grocery";
+
     
                     $conn = new mysqli($servername, $username, $password, $dbname);
     
@@ -93,34 +94,14 @@
                     $_SESSION['confirmation_details'] = $cart;
                     
                     $_SESSION['form_submitted'] = true; 
-                    // $_SESSION['cart'] = array();
-                    // $_SESSION['totalQuantity'] = 0;
-                    // $_SESSION['totalPrice'] = 0.00;
 
-                    // header("Location: ".$_SERVER['REQUEST_URI']);
-                    // exit();
 
                 }
 
 
+?>
 
-                // $cart = unserialize($_POST['cart']);
-                // if (!empty($cart) && is_array($cart)) {
-                //     echo "<h2 class='cart-content'>Cart Contents:</h2>";
-                //     echo "<ul class='checkout-ul'>";
-                //     foreach ($cart as $product_id => $item) {
-                //         echo "<li>{$item['product_name']} - Quantity: {$item['quantity']}, Unit Price: {$item['unit_price']}, Unit Quantity: {$item['unit_quantity']}</li>";
-                //     }
-                //     echo "</ul>";
-                // } else {
-                //     echo "<p>Cart is empty or invalid.</p>";
-                // }
-
-                
-            ?>
-
-            <?php
-
+<?php
             if($_SESSION['form_submitted'] === true) {
 
                 //If form is submitted.
@@ -173,8 +154,7 @@
             } else {
 
             }
-
-            ?>
+?>
 
     <div class="container">
         <div class="header">
@@ -216,7 +196,8 @@
                     </div>
                     <div class="sub-form">
                     <label for="states">State:</label>
-                        <select required name="state">
+                        <select class="state" required name="state">
+                            <option selected disabled value="state">Select State</option>
                             <option value="VIC">VIC</option>
                             <option value="ACT">ACT</option>
                             <option value="NSW">NSW</option>
